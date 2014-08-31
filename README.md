@@ -1,2 +1,2 @@
-heysponsors
+Hey sponsors!
 ===========
