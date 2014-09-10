@@ -8,13 +8,13 @@ import datetime
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sponsorsManager', '0004_auto_20140909_0414'),
+        ('crawler', '0010_auto_20140909_2048'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='date',
-            field=models.DateTimeField(default=datetime.datetime(2014, 9, 9, 4, 24, 36, 959881)),
+            model_name='query',
+            name='Timestamp',
+            field=models.DateTimeField(default=datetime.datetime(2014, 9, 9, 20, 49, 8, 972291)),
         ),
     ]
