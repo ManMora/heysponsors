@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.shortcuts import render
 from django.template import RequestContext, loader
 from django.contrib import auth
@@ -26,3 +27,9 @@ def index(request):
 
 def invalid(request):
 	return render(request, 'sponsorsManager/invalid.html')
+
+
+def logout_view(request):
+    logout(request)
+    return render(request, 'sponsorsManager/login.html')
+    # Redirect to a success page.
