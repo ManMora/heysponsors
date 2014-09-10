@@ -3,5 +3,13 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-Esto es el login. Si ves esto, ya hay una template que puedes modificar :3
+
+<form action="/sponsors/auth/" method="post">{% csrf_token %}
+	<label for="username">Username:</label>
+	<input type="text" name ="username" value="" id="username">
+	<label for="Password">Password:</label>
+	<input type="password" name ="password" value="" id="Password">
+	<input type="submit" value="login">
+</form>
+
 {% endblock %}
