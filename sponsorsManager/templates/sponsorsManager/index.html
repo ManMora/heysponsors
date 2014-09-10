@@ -2,9 +2,28 @@
 
 
 {% block title %}Hey! sponsors{% endblock %}
+{% block actual %}Welcome!{% endblock %}
 
 {% block content %}
+<div class="addevent">
 <a href="/logout/">Logout</a>
 	<h1>Hello! {{full_name}} :3 You have logged in!</h1>
+	{% if user.is_authenticated %}
+	hola
+	{{user}}
+	{% endif %}
+
+	<h1>Your events:</h1>
+	<table>
+	<thead><tr><th>Events</th></tr></thead>
+	{% for event in user.Events.all %}
+	<tr>
+		
+		<td>{{event}}</td>
+	
+	</tr>
+	{% endfor %}
+	</table>
+</div>
 {% endblock %}
 
