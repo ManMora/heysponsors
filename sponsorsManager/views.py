@@ -1,4 +1,6 @@
+<<<<<<< HEAD
 from django.shortcuts import redirect
+from django.contrib.auth import logout
 from django.shortcuts import render
 from django.template import RequestContext, loader
 from django.contrib import auth
@@ -35,7 +37,12 @@ def index(request):
 
 
 def invalid(request):
+
     return render(request, 'sponsorsManager/invalid.html')
+
+def logout_view(request):
+    logout(request)
+    return render(request, 'sponsorsManager/login.html')
 
 
 def signupForm(request):
@@ -55,3 +62,4 @@ def signupForm(request):
         form = UserCreateForm()
         
     return render(request, 'sponsorsManager/signup.html', {'form': form, })
+
