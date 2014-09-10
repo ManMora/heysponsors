@@ -1,15 +1,69 @@
 {% extends "base_generic.html" %}
 
+{% block title %}Sign up{% endblock %}
+{% block actual %}Sign up{% endblock %}
 
-{% block title %}Hey! sponsors{% endblock %}
-
-{% block content %}
-<form method="post" action="">{% csrf_token %}
-        {% for field in form %}
-            {{field.label_tag}}{{ field }}
-        {% endfor %}
-<input type="submit">
-</form>
+{% block imports %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+{% load staticfiles %}
+<link href="{% static "sponsorsManager/style.css" %}" rel="stylesheet">
 
 {% endblock %}
+{% load widget_tweaks %}
+
+{% block content %}
+<style>
+	
+	body{
+		
+		height: auto;
+		
+	}
+	
+</style>
+<div class="container vertical-cont" id="login-container">
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-5"></div>
+		<div class="col-md-5">
+		
+				<div class="jumbotron" id="loginjumbo" >
+				<p class="top-label-jumbo">Sign up</p>
+					
+					<form method="post" action="">{% csrf_token %}
+					        {% for field in form %}
+					           
+					            <div class="form-group">
+					            	{% with pholder="placeholder:"|add:field.name.capitalize %}
+										{% if 'Password' in pholder %}
+											{% with pholder="placeholder:Password" %}
+												
+												{{ field|add_class:"field"|attr:pholder}}
+												
+											{% endwith%}
+										{% else %}
+										
+											{{ field|add_class:"field"|attr:pholder}}
+										{% endif %}
+					            	{% endwith%}
+					            </div>
+					            
+					        {% endfor %}
+					<div class="form-group submit">
+					<input class="btn btn-success submit" type="submit" value="Sign up">
+					</div>
+					</form>
+
+				</div>
+		
+		</div>
+		<div class="col-md-1"></div>
+		
+	</div>
+</div>
+	
+{% endblock %}
+
 

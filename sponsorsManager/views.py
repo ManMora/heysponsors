@@ -51,5 +51,7 @@ def signupForm(request):
             return render(request, 'sponsorsManager/index.html',
                           {'full_name': request.POST.get('username', '')})
     else:
+    	
         form = UserCreateForm()
+        
     return render(request, 'sponsorsManager/signup.html', {'form': form, })
