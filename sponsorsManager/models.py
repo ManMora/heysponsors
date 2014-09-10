@@ -2,15 +2,14 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User, UserManager
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth.models import AbstractUser
 
 
 class UserProfile(models.Model):
-    #user = models.ForeignKey(User, unique=True, related_name='profile')
-    user = models.OneToOneField(User)
+    user = models.ForeignKey(User, unique=True, related_name='user_data')
     location_latitud = models.CharField(max_length=140)
     location_altitud = models.CharField(max_length=140)
     organization = models.CharField(max_length=140)
-
 
     class Meta:
         verbose_name = "User"
@@ -93,4 +92,3 @@ class Sponsorship(models.Model):
     class Meta:
         verbose_name = "Sponsorship"
         verbose_name_plural = "Sponsorships"
-
