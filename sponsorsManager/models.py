@@ -13,24 +13,32 @@ class UserProfile(models.Model):
 
     class Meta:
         verbose_name = "User"
-        verbose_name_plural = "Users"
+    
+    def __str__(self):
+        return self.user.username
+
+    def select_events(self):
+        return self.select_related('Events')
 
 
 class Event(models.Model):
     name = models.CharField(max_length=140)
     description = models.TextField()
-    user = models.ForeignKey('UserProfile', related_name='Events')
+    user = models.ForeignKey(User, related_name='Events')
     date = models.DateTimeField(blank=False, default=datetime.now())
     duration = models.TimeField(blank=False)
     link_map = models.CharField(max_length=140)
     url_event = models.URLField(max_length=140)
-    team_members = models.ManyToManyField('UserProfile')
+    ##team_members = models.ManyToManyField(User)
     budget = models.IntegerField()
     goal = models.TextField()
 
     class Meta:
         verbose_name = "Event"
         verbose_name_plural = "Events"
+
+    def __str__(self):
+        return self.name
 
 
 class Needs(models.Model):
