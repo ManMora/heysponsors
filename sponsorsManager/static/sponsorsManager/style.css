@@ -14,8 +14,79 @@ html{
 #loginjumbo{
 	
 	 margin: 50px auto;
+	 padding: 0px;
+	 border-radius: 0px;
 	
 		
+}
+
+#loginjumbo form{
+	
+
+	
+	 border-radius: 0px;
+	
+		
+}
+
+::-webkit-input-placeholder {
+   text-align: center;
+   font-size: 40px;
+}
+
+#loginjumbo .form-group{
+	
+	padding: 0px 20px;
+	margin-bottom: 50px;	
+	
+}
+
+#loginjumbo .form-group input.field{
+	
+	width: 80%;
+	margin: 20px auto;
+	display: block;
+	height: 60px;
+	border: none;
+	font-size: 50px;
+	border-bottom:2px solid #2b2b2b;
+	background: none;
+	
+	
+	
+		
+}
+
+#loginjumbo .form-group input.submit{
+	
+	width: 100%;
+	border-radius: 0px;
+	display: block;
+	height: 60px;
+	font-size: 30px;
+
+}
+
+#loginjumbo .form-group.submit{
+	
+	width: 100%;
+	padding: 0px;
+	display: block;
+	height: 40px;
+
+}
+
+
+.jumbotron .top-label-jumbo{
+	
+	width: 100%;
+	font-weight: 400;
+	padding: 20px 0px;
+	text-align: center;
+	font-size: 50px;
+	background: #BDC3C7;
+	line-height: 50px;
+	
 }
 
 body{

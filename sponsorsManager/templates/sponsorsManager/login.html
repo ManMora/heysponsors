@@ -14,7 +14,6 @@
 
 {% block content %}
 
-<<<<<<< HEAD
 <div class="container vertical-cont" id="login-container">
 	<div class="row">
 		<div class="col-md-1"></div>
@@ -22,13 +21,20 @@
 		<div class="col-md-5">
 		
 				<div class="jumbotron" id="loginjumbo" >
-					<form action="/sponsors/auth/" method="post">{% csrf_token %}
-						<label for="username">Username:</label>
-						<input type="text" name ="username" value="" id="username">
-						<label for="Password">Password:</label>
-						<input type="password" name ="password" value="" id="Password">
-						<input type="submit" value="login">
-					</form>
+				<p class="top-label-jumbo">Iniciar sesión</p>
+				  <form role="form" action="/sponsors/auth/" method="post">{% csrf_token %}
+				  
+					<div class="form-group">
+						
+						<input class="field" placeholder="Username" type="text" name ="username" value="" id="username">
+					</div>
+					<div class="form-group">
+						<input class="field" placeholder="Password" type="password" name ="password" value="" id="Password">
+					</div>
+					<div class="form-group submit">
+					<input class="btn btn-success submit" type="submit" value="Login">
+					</div>
+				</form>
 				</div>
 		
 		</div>
@@ -37,10 +43,4 @@
 	</div>
 </div>
 	
-
-	
-=======
-
-
->>>>>>> f49e39f71e857293a08011f3e8d03b52b242f4a0
 {% endblock %}
