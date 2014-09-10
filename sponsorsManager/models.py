@@ -1,17 +1,16 @@
 from datetime import datetime
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, UserManager
 from phonenumber_field.modelfields import PhoneNumberField
 
 
 class UserProfile(models.Model):
+    #user = models.ForeignKey(User, unique=True, related_name='profile')
     user = models.OneToOneField(User)
     location_latitud = models.CharField(max_length=140)
     location_altitud = models.CharField(max_length=140)
     organization = models.CharField(max_length=140)
 
-    def __str__(self):
-        return self.first_name
 
     class Meta:
         verbose_name = "User"
