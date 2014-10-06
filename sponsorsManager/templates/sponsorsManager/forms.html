@@ -2,7 +2,7 @@
 
 
 {% block title %}Hey! sponsors{% endblock %}
-{% block actual %}Adding new{% endblock %}
+{% block actual %}Sign up{% endblock %}
 {% load widget_tweaks %}
 {% block content %}
 <style>
@@ -15,7 +15,7 @@
 	
 </style>
 <div class="addevent">
-<h1> <i class="fa fa-plus"></i> Add</h1>
+<h1> <i class="fa fa-plus"></i> {% block form_title %}{% endblock %}</h1>
 <form method="post" action="">{% csrf_token %}
 					{% if form.errors %}
 					{% for field in form %}
@@ -34,13 +34,22 @@
 
 					{% for field in form %}
 					<div class="form-group">
-					{{field.label_tag}}
-					<br />
-					{{ field|add_class:"field" }}
-					</div>
+					            	{% with pholder="placeholder:"|add:field.name.capitalize %}
+										{% if 'Password' in pholder %}
+											{% with pholder="placeholder:Password" %}
+												
+												{{ field|add_class:"field"|attr:pholder}}
+												
+											{% endwith%}
+										{% else %}
+										
+											{{ field|add_class:"field"|attr:pholder}}
+										{% endif %}
+					            	{% endwith%}
+					            </div>
 					{% endfor %}
 					<div class="form-group submit">
-						<input class="btn btn-success submit" type="submit" value="Add">
+						<input class="btn btn-success submit" type="submit" value='{% block form_button_submit %}{% endblock %}'>
 					</div>
 				</form>
 </div>
