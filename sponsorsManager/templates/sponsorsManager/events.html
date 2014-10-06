@@ -1,4 +1,10 @@
 {% extends "base_generic.html" %}
+{% block nav_actual %}
+	<ul class="nav navbar-nav">
+	    <li class=""><a href="/{{user}}">Profile</a></li>
+	    <li class=""><a href="/logout">Logout</a></li>
+	</ul>
+{% endblock %}
 
 
 {% block title %}Hey! sponsors{% endblock %}
@@ -6,13 +12,8 @@
 
 {% block content %}
 <div class="addevent">
-<a href="/logout/">Logout</a>
-	<h1>Hello! {{full_name}} :3 You have logged in!</h1>
-	{% if user.is_authenticated %}
-	hola
-	{{user}}
-	{% endif %}
-
+	<h1>Hello! {{user}}</h1>
+	{% if user.Events.count > 0 %}
 	<h1>Your events:</h1>
 	<table>
 	<thead><tr><th>Events</th></tr></thead>
@@ -23,7 +24,8 @@
 	
 	</tr>
 	{% endfor %}
-	<button></button>
+	{% endif %}
+	<a href="/events/add_event/">Add Event</a>
 	</table>
 </div>
 {% endblock %}
