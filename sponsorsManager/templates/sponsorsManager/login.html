@@ -24,10 +24,10 @@
 
 				<p class="top-label-jumbo">Log in</p>
                 {% if error_message  %}
-                    <div class="alert alert-danger"><{% error_message  %}/div>
+                <div class="alert alert-danger">{{ error_message }}</div>
                 {% endif  %}
                 {% if success_message  %}
-                    <div class="alert alert-success"><{% success_message %}/div>
+                <div class="alert alert-success">{{success_message}}</div>
                 {% endif  %}
 
                 <form role="form" action="/auth/" method="post">{% csrf_token %}
