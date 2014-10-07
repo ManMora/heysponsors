@@ -8,6 +8,12 @@
 {% block form_title%}
 Sign up
 {% endblock %}
+{% if error_message  %}
+    <div class="alert alert-danger"><{% error_message  %}/div>
+{% endif  %}
+{% if success_message  %}
+    <div class="alert alert-success"><{% success_message %}/div>
+{% endif  %}
 {% block form_button_submit %}
 Sign up
 {% endblock %}
