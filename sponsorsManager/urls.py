@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     url(r'^events/add_event/$',
     	views.general_create,
     	{'generic_form': EventCreateForm,
-    	'template_name': 'sponsorsManager/event_form.html'
+    	'template_name': 'sponsorsManager/event_create_form.html'
     	},
     	 name='Add Event'),
     url(r'^(?P<user_name>\w{0,50})/edit/$',

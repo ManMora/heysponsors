@@ -44,10 +44,8 @@ class UserProfileEditForm(forms.ModelForm):
 
 class EventCreateForm(ModelForm):
     description = forms.CharField(required=False, widget=forms.Textarea)
-    duration = forms.TimeField(required=False)
     link_map = forms.CharField(required=False)
     url_event = forms.URLField(required=False)
-    budget = forms.IntegerField(required=False)
     goal = forms.CharField(required=False, widget=forms.Textarea)
 
     class Meta:
@@ -58,10 +56,8 @@ class EventCreateForm(ModelForm):
 
 class EventReadForm(ModelForm):
     description = forms.CharField(required=False, widget=forms.Textarea)
-    duration = forms.TimeField(required=False)
     link_map = forms.CharField(required=False)
     url_event = forms.URLField(required=False)
-    budget = forms.IntegerField(required=False)
     goal = forms.CharField(required=False, widget=forms.Textarea)
 
 
