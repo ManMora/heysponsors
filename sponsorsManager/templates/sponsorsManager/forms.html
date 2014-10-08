@@ -5,43 +5,37 @@
 {% block actual %}Sign up{% endblock %}
 {% load widget_tweaks %}
 {% block content %}
-<style>
-	
-	body{
-		
-		height: auto;
-		
-	}
-	
-</style>
 <div class="addevent">
 {{success_message}}
 <h1> <i class="fa fa-plus"></i> {% block form_title %}{% endblock %}</h1>
+{% if success_message  %}
+    <div class="alert alert-success">{{ success_message }}</div>
+{% endif  %}
 <form method="post" action="">{% csrf_token %}
 					{% for form in forms %}
 					{% if form.errors %}
-					{% for field in form %}
-					{% for error in field.errors %}
-					<div class="alert alert-error">
-						<strong>{{ error|escape }}</strong>
-					</div>
-					{% endfor %}
-					{% endfor %}
-					{% for error in form.non_field_errors %}
-					<div class="alert alert-error">
+                    {% for error in form.non_field_errors %}
+					<div class="alert alert-danger">
 						<strong>{{ error|escape }}</strong>
 					</div>
 					{% endfor %}
 					{% endif %}
 
-					{% for field in form %}
+                    {% for field in form %}
 					<div class="form-group">
-					            	{% with pholder="placeholder:"|add:field.name.capitalize %}
+                    {% if form.errors  %}
+					{% for error in field.errors %}
+					<div class="alert alert-danger">
+						<strong>{{ error|escape }}</strong>
+					</div>
+                    {% endfor %}
+                    {% endif  %}
+                    {% with pholder="placeholder:"|add:field.name.capitalize %}
 										{% if 'Password' in pholder %}
 											{% with pholder="placeholder:Password" %}
-												
+
 												{{ field|add_class:"field"|attr:pholder}}
-												
+
 											{% endwith%}
 										{% elif 'First_name' in pholder %}
 											{% with pholder="placeholder:First name" %}
@@ -56,7 +50,7 @@
 												
 											{% endwith%}
 										{% else %}
-										
+
 											{{ field|add_class:"field"|attr:pholder}}
 										{% endif %}
 					            	{% endwith%}
@@ -68,5 +62,5 @@
 					</div>
 				</form>
 </div>
-				
+
 {% endblock %}
