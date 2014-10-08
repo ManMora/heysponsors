@@ -23,5 +23,7 @@ urlpatterns = patterns('',
     	 name='Add Event'),
     url(r'^(?P<user_name>\w{0,50})/edit/$',
         views.groot_user, name='Edit user'),
+    url(r'^(?P<user_name>\w{0,50})/events/$',
+        views.event_view, name='events'),
 
 )

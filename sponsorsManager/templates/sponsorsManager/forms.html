@@ -6,7 +6,6 @@
 {% load widget_tweaks %}
 {% block content %}
 <div class="addevent">
-{{success_message}}
 <h1> <i class="fa fa-plus"></i> {% block form_title %}{% endblock %}</h1>
 {% if success_message  %}
     <div class="alert alert-success">{{ success_message }}</div>
@@ -58,8 +57,10 @@
 					{% endfor %}
 				{% endfor %}
 					<div class="form-group submit">
-						<input class="btn btn-success submit" type="submit" value='{% block form_button_submit %}{% endblock %}'>
+						<input class="btn btn-success submit" type="submit" name='insert' value='{% block form_button_submit %}{% endblock %}'>
+					{% block erasable %}
 					</div>
+					{% endblock %}
 				</form>
 </div>
 
