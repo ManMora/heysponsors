@@ -1,0 +1,18 @@
+{% extends "sponsorsManager/forms.html" %}
+{% block nav_actual %}
+	<ul class="nav navbar-nav">
+	    <li class="active"><a href="/{{user}}">Profile</a></li>
+	</ul>
+{% endblock %}
+
+{% block form_title%}
+Edit event
+{% endblock %}
+{% block form_button_submit %}
+Update event
+{% endblock %}
+{% block buttons %}
+<div class="form-group submit">
+	<input class="btn btn-success submit" type="submit" name='insert' value='Edit'>
+</div>
+{% endblock %}
