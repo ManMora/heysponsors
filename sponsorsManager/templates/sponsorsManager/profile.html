@@ -3,7 +3,7 @@
 {% block nav_actual %}
 	<ul class="nav navbar-nav">
 	    <li class=""><a href="/{{user}}">Profile</a></li>
-	    <li class=""><a href="/events">My events</a></li>
+	    <li class=""><a href="/{{user}}/events">My events</a></li>
 	    <li class=""><a href="/logout">Logout</a></li>
 	</ul>
 {% endblock %}
@@ -12,11 +12,8 @@
 {% block actual %}Welcome!{% endblock %}
 
 {% block content %}
-	<h1>Hello {{user}}!</h1>
-	<a href="./edit"><h1>Edit profile</h1></a>
-	
+	<h1>Hello {{user|title}}!</h1>
 
-    <a class="btn btn-default"  href="/{{user}}/events"><h4><i class="fa fa-calendar"  ></i>Go to my events</h4></a>
 </div>
 {% endblock %}
 

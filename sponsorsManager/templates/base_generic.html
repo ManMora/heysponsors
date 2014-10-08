@@ -23,7 +23,7 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="#">Hey Sponsors</a>
+		      <a class="navbar-brand" href="/home">Hey Sponsors</a>
 		    </div>
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -42,10 +42,13 @@
         <div class="container">
             <div class="col-md-1"></div>
             <div id="content-wrapper"  class="col-md-10">
-                <div class="sidebar col-md-3">
-                    <div class="sidebar-content">
+                 <div class="sidebar col-md-3">
+                    <div class="{% block sidebar-customs  %}{% endblock  %}  sidebar-content">
                     <ul>
-                        <li>hola</li>
+                        <li><i class="fa fa-search"></i><a href="/sponsors">Sponsors</a></li>
+                        <li><i class="fa fa-calendar"></i><a href="/{{user}}/events">My Events</a></li>
+                        <li><i class="fa {% block settings-customs  %}{% endblock  %}  fa-cog"></i><a href="/{{user}}/edit">My Settings</a></li>
+                        <li><i class="fa fa-clock-o"></i><a href="/{{user}}/history"  >My History</a></i></li>
                     </ul>
                 </div>
                 </div>
@@ -56,8 +59,8 @@
             <div class="col-md-1"></div>
          </div>
 </div>
-	<footer>
-		{% block footer%}{% endblock %}
-	</footer>
+<footer>
+    {% block footer%}{% endblock %}
+</footer>
 </body>
 </html>

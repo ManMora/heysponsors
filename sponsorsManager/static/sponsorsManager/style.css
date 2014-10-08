@@ -10,13 +10,41 @@ html{
 
 }
 
+
+
 #content-wrapper{
 
     min-height:100%;
 }
 
+.sidebar.hidden{
+
+    display:none;
+
+}
+
+.sidebar ul{
 
 
+    padding:20px;
+    list-style-type:none;
+
+}
+
+.sidebar ul li i{
+
+    font-size:25px;
+    padding-right:10px;
+}
+
+.sidebar ul li{
+
+    line-height:25px;
+    vertical-align:middle;
+    padding-bottom:10px;
+    padding-top:10px;
+    border-bottom: 2px rgba(12,12,12,0.7)  groove;
+}
 
 i{
 
@@ -57,7 +85,6 @@ a:hover{
 .sidebar .sidebar-content{
     background:#066699;
     width:16%;
-    padding:20px;
     position:fixed;
 }
 
