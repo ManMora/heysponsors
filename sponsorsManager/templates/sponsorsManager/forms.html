@@ -6,7 +6,7 @@
 {% load widget_tweaks %}
 {% block content %}
 <div class="addevent">
-<h1> <i class="fa fa-plus"></i> {% block form_title %}{% endblock %}</h1>
+<h1>{% block form_title %}{% endblock %}</h1>
 {% if success_message  %}
     <div class="alert alert-success">{{ success_message }}</div>
 {% endif  %}
@@ -38,15 +38,15 @@
 											{% endwith%}
 										{% elif 'First_name' in pholder %}
 											{% with pholder="placeholder:First name" %}
-												
+
 												{{ field|add_class:"field"|attr:pholder}}
-												
+
 											{% endwith%}
 										{% elif 'Last_name' in pholder %}
 											{% with pholder="placeholder:First name" %}
-												
+
 												{{ field|add_class:"field"|attr:pholder}}
-												
+
 											{% endwith%}
 										{% else %}
 
@@ -57,7 +57,7 @@
 					{% endfor %}
 				{% endfor %}
 					{% block buttons %}
-					
+
 					{% endblock %}
 				</form>
 </div>

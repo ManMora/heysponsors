@@ -29,11 +29,12 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-
+            {% if user.is_authenticated %}
 		       <ul class="nav navbar-nav navbar-right">
                     <li><a href="/{{user}}/edit"><i class="fa fa-cog"></i>My Settings</a></li>
                     <li><a href="/logout" ><i class="fa fa-sign-out"></i>Log out</a></li>
-		       </ul>
+                </ul>
+            {% endif %}
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
