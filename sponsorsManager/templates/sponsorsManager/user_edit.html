@@ -7,8 +7,12 @@
 {% endblock %}
 {% block settings-customs  %}fa-spin {% endblock  %}
 {% block form_title %}
-Edit your information
+Edit your information 
+{{success_message}}
 {% endblock %}
 {% block form_button_submit %}
 Done
+{% endblock %}
+{% block erasable %}
+	<input class="btn btn-danger submit" type="submit" name='deactivate' value='Deactivate'>
 {% endblock %}

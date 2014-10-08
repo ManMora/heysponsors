@@ -10,7 +10,23 @@ html{
 
 }
 
+h1.e404{
 
+    text-align:center;
+    font-size:4.5em;
+
+}
+
+html.e404{
+
+    height:100%;
+	background: url('img/404.jpg')  no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
+}
 
 #content-wrapper{
 

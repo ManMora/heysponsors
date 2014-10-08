@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+{% block nav_actual %}
+	<ul class="nav navbar-nav">
+	    <li class=""><a href="/{{user}}">Profile</a></li>
+	    <li class=""><a href="/logout">Logout</a></li>
+	</ul>
+{% endblock %}
+{% block html-customs  %}logged-in{% endblock  %}
+
+{% block title %}Hey! sponsors{% endblock %}
+{% block actual %}Welcome!{% endblock %}
+
+{% block content %}
+<div class="addevent">
+	<h1>Hello! {{user}}</h1>
+	{% if user.Events.count > 0 %}
+	<h1>Your events:</h1>
+	<table>
+	<thead><tr><th>Events</th></tr></thead>
+	{% for event in user.Events.all %}
+	<tr>
+
+		<td>{{event}}</td>
+
+	</tr>
+	{% endfor %}
+	{% endif %}
+    <a href="/events/add_event/"><i class="fa fa-plus"  ></i>Add Event</a>
+	</table>
+</div>
+{% endblock %}
+

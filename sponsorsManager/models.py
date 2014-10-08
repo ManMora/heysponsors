@@ -11,6 +11,7 @@ class UserProfile(models.Model):
     location_latitud = models.CharField(max_length=140)
     location_altitud = models.CharField(max_length=140)
     organization = models.CharField(max_length=140)
+    active = models.BooleanField(default=1)
     class Meta:
         verbose_name = "User"
     
@@ -20,6 +21,8 @@ class UserProfile(models.Model):
     def select_events(self):
         return self.select_related('Events')
 
+    def is_active(self):
+        return self.active
 
 class Event(models.Model):
     name = models.CharField(max_length=140)
