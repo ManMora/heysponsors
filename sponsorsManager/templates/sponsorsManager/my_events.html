@@ -20,12 +20,12 @@
 	{% for event in user.Events.all %}
 	<tr>
 
-		<td>{{event}}</td>
+		<td><a href="/{{user}}/events/{{event}}">{{event}}</a></td>
 
 	</tr>
 	{% endfor %}
 	{% endif %}
-    <a href="/events/add_event/"><i class="fa fa-plus"  ></i>Add Event</a>
+    <a href="/events/add_event/"><i class="fa fa-plus"></i>Add Event</a>
 	</table>
 </div>
 {% endblock %}

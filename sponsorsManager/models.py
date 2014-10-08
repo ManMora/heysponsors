@@ -25,7 +25,7 @@ class UserProfile(models.Model):
         return self.active
 
 class Event(models.Model):
-    name = models.CharField(max_length=140)
+    name = models.CharField(max_length=140, unique=True)
     description = models.TextField()
     user = models.ForeignKey(User, related_name='Events')
     date = models.DateTimeField(blank=False, default=datetime.now())
