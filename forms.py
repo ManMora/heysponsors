@@ -6,17 +6,38 @@ from sponsorsManager.models import Event
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-
-class UserCreateForm(UserCreationForm):
-    email = forms.EmailField(
-        max_length=75, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
-    organization = forms.CharField(
-        max_length=140, widget=forms.TextInput(
-            attrs={'placeholder': 'Organization'}))
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'organization', 'password1')
+        fields = ["username","email", "password"]
+
+class UserCreateForm(forms.ModelForm):
+    """email = forms.EmailField(
+        max_length=75, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+    organization = forms.CharField(
+        max_length=140, widget=forms.TextInput(
+            attrs={'placeholder': 'Organization'}))"""
+    class Meta:
+        model = UserProfile
+        fields = []
+
+class UserEditForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    class Meta:
+        model = User
+        fields = ["first_name", "last_name", "email", "password"]
+
+class UserProfileEditForm(forms.ModelForm):
+    """email = forms.EmailField(
+        max_length=75, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+    organization = forms.CharField(
+        max_length=140, widget=forms.TextInput(
+            attrs={'placeholder': 'Organization'}))"""
+    class Meta:
+        model = UserProfile
+        fields = ['organization']
 
 
 class EventCreateForm(ModelForm):

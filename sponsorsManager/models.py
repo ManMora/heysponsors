@@ -7,10 +7,10 @@ from django.contrib.auth.models import AbstractUser
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True, related_name='user_data')
+    #user = models.OneToOneField(User, related_name='profile')
     location_latitud = models.CharField(max_length=140)
     location_altitud = models.CharField(max_length=140)
     organization = models.CharField(max_length=140)
-
     class Meta:
         verbose_name = "User"
     

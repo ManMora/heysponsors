@@ -87,3 +87,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'     # app name (dot) model name

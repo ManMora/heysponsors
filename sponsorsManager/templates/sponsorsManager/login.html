@@ -1,7 +1,12 @@
 {% extends "base_generic.html" %}
 
 {% block title %}Login{% endblock %}
-{% block actual %}Login{% endblock %}
+{% block nav_actual %}
+	<ul class="nav navbar-nav">
+	    <li class=""><a href="/signup">Sign up</a></li>
+	    <li class=""><a href="/login">Log in</a></li>
+	</ul>
+{% endblock %}
 
 {% block imports %}
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
@@ -19,8 +24,9 @@
 		<div class="col-md-1"></div>
 		<div class="col-md-5"></div>
 		<div class="col-md-5">
-		
 				<div class="jumbotron" id="loginjumbo" >
+				<h1>{{error_message}}</h1>
+				<h1>{{success_message}}</h1>
 				<p class="top-label-jumbo">Log in</p>
 				  <form role="form" action="/auth/" method="post">{% csrf_token %}
 				  
