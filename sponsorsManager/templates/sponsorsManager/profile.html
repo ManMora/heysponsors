@@ -12,12 +12,8 @@
 {% block actual %}Welcome!{% endblock %}
 
 {% block content %}
-	<h1>Hello {{user}}!</h1>
-	<a href="./edit"><h1>Edit profile</h1></a>
-	
-	<a href="/events"><h1>Events</h1></a>
+	<h1>Hello {{user|title}}!</h1>
 
-    <a class="btn btn-default"  href="/events"><h4><i class="fa fa-calendar"  ></i>Go to my events</h4></a>
 </div>
 {% endblock %}
 
