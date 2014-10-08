@@ -29,10 +29,10 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-                {% block nav_actual %}{% endblock %}
 
 		       <ul class="nav navbar-nav navbar-right">
-
+                    <li><a href="/{{user}}/edit"><i class="fa fa-cog"></i>My Settings</a></li>
+                    <li><a href="/logout" ><i class="fa fa-sign-out"></i>Log out</a></li>
 		       </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
@@ -45,6 +45,7 @@
                  <div class="sidebar col-md-3">
                     <div class="{% block sidebar-customs  %}{% endblock  %}  sidebar-content">
                     <ul>
+                        <li><i class="fa fa-dashboard"></i><a href="/{{user}}">My dashboard</a></li>
                         <li><i class="fa fa-search"></i><a href="/sponsors">Sponsors</a></li>
                         <li><i class="fa fa-calendar"></i><a href="/{{user}}/events">My Events</a></li>
                         <li><i class="fa {% block settings-customs  %}{% endblock  %}  fa-cog"></i><a href="/{{user}}/edit">My Settings</a></li>
