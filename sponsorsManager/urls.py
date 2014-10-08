@@ -1,6 +1,8 @@
 from forms import UserCreateForm
+from forms import EventReadForm
 from forms import EventCreateForm
 from sponsorsManager.models import UserProfile
+from sponsorsManager.models import Event
 from django.conf.urls import patterns, url
 from sponsorsManager import views
 
@@ -25,5 +27,13 @@ urlpatterns = patterns('',
         views.groot_user, name='Edit user'),
     url(r'^(?P<user_name>\w{0,50})/events/$',
         views.event_view, name='events'),
+    url(r'^(?P<user_name>\w{0,50})/events/(?P<instance_id>\w{0,50})$',
+        views.general_groot, 
+        {
+        'generic_form': EventReadForm,
+        'template_name': "sponsorsManager/event_form.html",
+        'generic_model': Event,
+        },
+        name='events'),
 
 )

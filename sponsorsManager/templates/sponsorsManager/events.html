@@ -20,7 +20,7 @@
 	{% for event in user.Events.all %}
 	<tr>
 
-		<td>{{event}}</td>
+		<td><a href="/{{user}}/events/{{event}}"></a>{{event}}</td>
 
 	</tr>
 	{% endfor %}

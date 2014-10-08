@@ -97,11 +97,11 @@ def signup(request):
                                 password=request.POST['password'])
             login(request, user)
             forms = {uform, pform}
-            return HttpResponseRedirect('/'+request.POST['username'])
+            return HttpResponseRedirect('/' + request.POST['username'])
 
         else:
             username = request.POST['username']
-            user = User.objects.get(username = username)
+            user = User.objects.get(username=username)
             print(user)
             if user is not None:
                 return render(request,
@@ -126,7 +126,7 @@ def home_with_message(request, message):
 def profile(request, user_name):
     user2 = request.user
     try:
-        user = User.objects.get(username = user_name)
+        user = User.objects.get(username=user_name)
         if user == user2 or user is None:
             return render(request, 'sponsorsManager/profile.html')
         else:
@@ -147,7 +147,7 @@ def logout_view(request):
 def event_view(request, user_name):
     user2 = request.user
     try:
-        user = User.objects.get(username = user_name)
+        user = User.objects.get(username=user_name)
         if user == user2 or user is None:
             return render(request, 'sponsorsManager/my_events.html')
         else:
@@ -187,16 +187,18 @@ def groot_user(request, user_name):
     if(request.user.is_authenticated()):
         user2 = request.user
         try:
-            user = User.objects.get(username = user_name)
+            user = User.objects.get(username=user_name)
             if user == user2 or user is None:
                 uform = UserEditForm()
                 pform = UserProfileEditForm()
                 template_name = 'sponsorsManager/user_edit.html'
-                model_profile_instance = UserProfile.objects.get(user=request.user)
+                model_profile_instance = UserProfile.objects.get(
+                    user=request.user)
                 pform = UserProfileEditForm(instance=model_profile_instance)
                 model_user_instance = request.user
                 uform = UserEditForm(
-                    initial={'username': request.user}, instance=model_user_instance)
+                    initial={'username': request.user},
+                    instance=model_user_instance)
                 forms = [uform, pform]
                 if request.method == "POST":
                     uform = UserEditForm(request.POST,
@@ -206,8 +208,8 @@ def groot_user(request, user_name):
                         request.POST, instance=model_profile_instance)
                     print(request.POST)
                     if 'deactivate' in request.POST:
-                        if request.user.check_password(request.
-                                                       POST.get('password', '')):
+                        if request.user.check_password(
+                                request.POST.get('password', '')):
                             print("yep, let's erase this.")
                             user = uform.save()
                             password = request.POST.get('password', '')
@@ -222,11 +224,12 @@ def groot_user(request, user_name):
 
                         else:
                             forms = [uform, pform]
-                            return render(request, template_name, {'forms': forms,
-                                                                   'success_message':
-                                                                   'Incorrect' +
-                                                                   ' password' +
-                                                                   '. Try again'})
+                            return render(request,
+                                          template_name, {'forms': forms,
+                                                          'success_message':
+                                                          'Incorrect' +
+                                                          ' password' +
+                                                          '. Try again'})
                     elif uform.is_valid() and pform.is_valid():
                         user = uform.save()
                         password = request.POST.get('password', '')
@@ -254,10 +257,13 @@ def groot_user(request, user_name):
         return index(request)
 
 
-def general_groot(request, instance_id,
-                  generic_form, template_name,
+def general_groot(request,
+                  user_name,
+                  instance_id,
+                  generic_form,
+                  template_name,
                   generic_model):
-    model_instance = generic_model.objects.get(id=instance_id)
+    model_instance = generic_model.objects.get(name=instance_id)
     form = generic_form(instance=model_instance)
     if request.method == 'POST':
         form = generic_form(request.POST, instance=model_instance)
@@ -268,8 +274,10 @@ def general_groot(request, instance_id,
             form.save()
             return HttpResponseRedirect("/home")
         else:
-            return render(request, template_name, {'form': form, })
-    print("holi")
-    return render(request, template_name, {'form': form, })
-    print("holi")
-    return render(request, template_name, {'form': form, })
+            forms = [form]
+            return render(request, template_name, {'forms': forms, })
+    else:
+        print("holi")
+        forms = [form]
+        return render(request, template_name, {'forms': forms, })
+

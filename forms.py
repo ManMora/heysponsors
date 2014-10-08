@@ -25,6 +25,8 @@ class UserCreateForm(forms.ModelForm):
 
 class UserEditForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
+    first_name = forms.CharField(required = False)
+    last_name = forms.CharField(required = False)
     class Meta:
         model = User
         fields = ["first_name", "last_name", "email", "password"]
@@ -41,7 +43,29 @@ class UserProfileEditForm(forms.ModelForm):
 
 
 class EventCreateForm(ModelForm):
-	class Meta:
-		model = Event
-		fields = ['name', 'description', 'date', 'duration',
+    description = forms.CharField(required=False, widget=forms.Textarea)
+    duration = forms.TimeField(required=False)
+    link_map = forms.CharField(required=False)
+    url_event = forms.URLField(required=False)
+    budget = forms.IntegerField(required=False)
+    goal = forms.CharField(required=False, widget=forms.Textarea)
+
+    class Meta:
+        model = Event
+        fields = ['name', 'description', 'date', 'duration',
 			'link_map', 'url_event', 'budget', 'goal']
+
+
+class EventReadForm(ModelForm):
+    description = forms.CharField(required=False, widget=forms.Textarea)
+    duration = forms.TimeField(required=False)
+    link_map = forms.CharField(required=False)
+    url_event = forms.URLField(required=False)
+    budget = forms.IntegerField(required=False)
+    goal = forms.CharField(required=False, widget=forms.Textarea)
+
+
+    class Meta:
+        model = Event
+        fields = ['name', 'description', 'date', 'duration',
+            'link_map', 'url_event', 'budget', 'goal']

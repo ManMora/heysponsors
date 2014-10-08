@@ -6,8 +6,15 @@
 {% endblock %}
 
 {% block form_title%}
-Add event
+Change this for different situations
 {% endblock %}
 {% block form_button_submit %}
 Add event
+{% endblock %}
+{% block buttons %}
+<div class="form-group submit">
+	<input class="btn btn-success submit" type="submit" name='update' value='Update'>
+	<input class="btn btn-success submit" type="submit" name='delete' value='Delete'>
+	<a href="./create_need"></a>
+</div>
 {% endblock %}
