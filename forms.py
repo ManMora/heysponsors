@@ -2,7 +2,7 @@ from django.db import models
 from django.forms import ModelForm
 from django import forms
 from sponsorsManager.models import UserProfile
-from sponsorsManager.models import Event
+from sponsorsManager.models import Event, Needs
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -65,3 +65,11 @@ class EventReadForm(ModelForm):
         model = Event
         fields = ['name', 'description', 'date', 'duration',
             'link_map', 'url_event', 'budget', 'goal']
+
+class NeedsCreateForm(ModelForm):
+    event = models.ForeignKey('Event', related_name="Needs")
+    name = models.CharField(max_length=140)
+
+    class Meta:
+        model = Needs
+        fields = ['name', 'description']

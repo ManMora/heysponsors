@@ -45,13 +45,16 @@ class Event(models.Model):
 
 
 class Needs(models.Model):
-    event = models.ForeignKey('Event', related_name="Needs")
+    event = models.ForeignKey('Event', related_name="Needs", unique=True)
     name = models.CharField(max_length=140)
     description = models.TextField()
 
     class Meta:
         verbose_name = "Needs"
         verbose_name_plural = "Needs"
+
+    def __str__(self):
+        return self.name
 
 
 class Sponsors(models.Model):
