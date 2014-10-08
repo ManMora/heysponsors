@@ -5,7 +5,7 @@
 	    <li class=""><a href="/logout">Logout</a></li>
 	</ul>
 {% endblock %}
-
+{% block html-customs  %}logged-in{% endblock  %}
 
 {% block title %}Hey! sponsors{% endblock %}
 {% block actual %}Welcome!{% endblock %}
@@ -19,13 +19,13 @@
 	<thead><tr><th>Events</th></tr></thead>
 	{% for event in user.Events.all %}
 	<tr>
-		
+
 		<td>{{event}}</td>
-	
+
 	</tr>
 	{% endfor %}
 	{% endif %}
-	<a href="/events/add_event/">Add Event</a>
+    <a href="/events/add_event/"><i class="fa fa-plus"  ></i>Add Event</a>
 	</table>
 </div>
 {% endblock %}
