@@ -9,10 +9,10 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from forms import UserCreateForm
 from forms import UserForm
-from forms import EventCreateForm
+from forms import EventCreateForm, NeedsCreateForm
 from forms import UserEditForm
 from forms import UserProfileEditForm
-from sponsorsManager.models import UserProfile
+from sponsorsManager.models import UserProfile, Event
 # Create your views here.
 
 
@@ -155,6 +155,21 @@ def event_view(request, user_name):
     except User.DoesNotExist:
         return HttpResponseRedirect('/404')
 
+def needs_view(request, user_name, event_name):
+    user2 = request.user
+    try:
+        user = User.objects.get(username=user_name)
+        if user == user2 or user is None:
+            print(user)
+            event = Event.objects.get(name=event_name)
+            return render(request, 'sponsorsManager/needs.html',
+                {'event': event,
+                })
+        else:
+            return HttpResponseRedirect('/404')
+    except User.DoesNotExist:
+        return HttpResponseRedirect('/404')
+
 
 def general_create(request, generic_form, template_name):
     form = generic_form()
@@ -168,10 +183,11 @@ def general_create(request, generic_form, template_name):
                 instance.user = user
             form.save()
             forms = [form]
-            return render(request,
-                          template_name,
-                          {'forms': forms,
-                           'success_message': 'Successfully added'})
+            return HttpResponseRedirect('/'+user.username+'/events')
+            #return render(request,
+             #             template_name,
+              #            {'forms': forms,
+               #            'success_message': 'Successfully added'})
 
         else:
             # return form with errors
@@ -181,6 +197,35 @@ def general_create(request, generic_form, template_name):
                           {'forms': forms, })
     forms = [form]
     return render(request, template_name, {'forms': forms, })
+
+def create_needs(request, user_name, event_name, generic_form, template_name):
+    form = generic_form()
+    event_instance = Event.objects.get(name=event_name)
+    if request.method == 'POST':
+        form = generic_form(request.POST)
+        if form.is_valid():
+            user = request.user
+            if user.is_authenticated():
+                data = user.user_data
+                instance = form.save(commit=False)
+                instance.event = event_instance
+            form.save()
+            forms = [form]
+            return HttpResponseRedirect('/'+user.username+'/events/')
+            #return render(request,
+             #             template_name,
+              #            {'forms': forms,
+               #            'success_message': 'Successfully added'})
+
+        else:
+            # return form with errors
+            forms = [form]
+            return render(request,
+                          template_name,
+                          {'forms': forms, })
+    forms = [form]
+    return render(request, template_name, {'forms': forms, })
+
 
 
 def groot_user(request, user_name):
@@ -269,15 +314,43 @@ def general_groot(request,
         form = generic_form(request.POST, instance=model_instance)
         if 'delete' in request.POST:
             model_instance.delete()
-            return HttpResponseRedirect("/home")
+            return HttpResponseRedirect("/"+user_name+"/events")
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/home")
+            return HttpResponseRedirect("/"+user_name+"/events")
         else:
             forms = [form]
-            return render(request, template_name, {'forms': forms, })
+            return render(request, template_name, {'forms': forms, 'event': instance_id})
     else:
         print("holi")
         forms = [form]
-        return render(request, template_name, {'forms': forms, })
+        return render(request, template_name, {'forms': forms, 'event': instance_id})
 
+def groot_needs(request,
+                  user_name,
+                  event_name,
+                  instance_id,
+                  generic_form,
+                  template_name,
+                  generic_model):
+    model_instance = generic_model.objects.get(name=instance_id)
+    form = generic_form(instance=model_instance)
+    if request.method == 'POST':
+        form = generic_form(request.POST, instance=model_instance)
+        if 'delete' in request.POST:
+            model_instance.delete()
+            return HttpResponseRedirect("/"+user_name+"/events")
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/"+user_name+"/events")
+        else:
+            forms = [form]
+            return render(request, template_name, {'forms': forms, 'event': instance_id})
+    else:
+        print("holi")
+        forms = [form]
+        return render(request, template_name, {'forms': forms, 'event': instance_id})
+
+
+def history (request, user_name):
+    return HttpResponseRedirect('/404')

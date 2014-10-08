@@ -1,8 +1,8 @@
 from forms import UserCreateForm
 from forms import EventReadForm
-from forms import EventCreateForm
+from forms import EventCreateForm, NeedsCreateForm
 from sponsorsManager.models import UserProfile
-from sponsorsManager.models import Event
+from sponsorsManager.models import Event, Needs
 from django.conf.urls import patterns, url
 from sponsorsManager import views
 
@@ -27,6 +27,8 @@ urlpatterns = patterns('',
         views.groot_user, name='Edit user'),
     url(r'^(?P<user_name>\w{0,50})/events/$',
         views.event_view, name='events'),
+    url(r'^(?P<user_name>\w{0,50})/history/$',
+        views.history, name='history'),
     url(r'^(?P<user_name>\w{0,50})/events/(?P<instance_id>\w{0,50})$',
         views.general_groot, 
         {
@@ -35,5 +37,24 @@ urlpatterns = patterns('',
         'generic_model': Event,
         },
         name='events'),
+    url(r'^(?P<user_name>\w{0,50})/events/(?P<event_name>\w{0,50})/add_need/$',
+        views.create_needs, 
+        {
+        'generic_form': NeedsCreateForm,
+        'template_name': "sponsorsManager/need_create_form.html",
+        },
+        name='events'),
+    url(r'^(?P<user_name>\w{0,50})/events/(?P<event_name>\w{0,50})/needs/$',
+        views.needs_view, 
+        name='needs'),
+    url(r'^(?P<user_name>\w{0,50})/events/(?P<event_name>\w{0,50})/(?P<instance_id>\w{0,50})/$',
+        views.groot_needs, 
+        {
+        'generic_form': NeedsCreateForm,
+        'template_name': "sponsorsManager/needs_form.html",
+        'generic_model': Needs,
+        },
+
+        name='needs'),
 
 )
