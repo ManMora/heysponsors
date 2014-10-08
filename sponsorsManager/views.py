@@ -86,10 +86,13 @@ def signup(request):
             profile.save()
             template_name = 'sponsorsManager/profile.html'
             user = authenticate(username=request.POST['username'],
-                                    password=request.POST['password'])
+                                password=request.POST['password'])
             login(request, user)
             forms = {uform, pform}
-            return HttpResponseRedirect("/home")
+            return render(request, template_name,
+                          {'success_message': 'Successfully added'}
+                          )
+
         else:
             # return form with errors
             return render(request, template_name, {'forms': forms, })
@@ -178,16 +181,11 @@ def groot_user(request, user_name):
                 user.save()
                 profile = pform.save(commit=False)
                 profile.user = user
-                profile.save
+                profile.save()
                 user = authenticate(username=request.user,
-                                    password=request.POST['password'])
+                                password=password)
                 login(request, user)
-                forms = [uform, pform]
-                return render(request,
-                              template_name,
-                              {'forms': forms,
-                               'success_message': 'Successfully changed'}
-                              )
+                HttpResponseRedirect('/home')
             else:
                 # return form with errors
                 forms = [uform, pform]
@@ -213,5 +211,7 @@ def general_groot(request, instance_id,
             return HttpResponseRedirect("/home")
         else:
             return render(request, template_name, {'form': form, })
+    print("holi")
+    return render(request, template_name, {'form': form, })
     print("holi")
     return render(request, template_name, {'form': form, })
