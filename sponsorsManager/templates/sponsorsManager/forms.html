@@ -15,8 +15,10 @@
 	
 </style>
 <div class="addevent">
+{{success_message}}
 <h1> <i class="fa fa-plus"></i> {% block form_title %}{% endblock %}</h1>
 <form method="post" action="">{% csrf_token %}
+					{% for form in forms %}
 					{% if form.errors %}
 					{% for field in form %}
 					{% for error in field.errors %}
@@ -41,6 +43,18 @@
 												{{ field|add_class:"field"|attr:pholder}}
 												
 											{% endwith%}
+										{% elif 'First_name' in pholder %}
+											{% with pholder="placeholder:First name" %}
+												
+												{{ field|add_class:"field"|attr:pholder}}
+												
+											{% endwith%}
+										{% elif 'Last_name' in pholder %}
+											{% with pholder="placeholder:First name" %}
+												
+												{{ field|add_class:"field"|attr:pholder}}
+												
+											{% endwith%}
 										{% else %}
 										
 											{{ field|add_class:"field"|attr:pholder}}
@@ -48,6 +62,7 @@
 					            	{% endwith%}
 					            </div>
 					{% endfor %}
+				{% endfor %}
 					<div class="form-group submit">
 						<input class="btn btn-success submit" type="submit" value='{% block form_button_submit %}{% endblock %}'>
 					</div>

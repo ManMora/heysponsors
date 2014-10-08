@@ -1,5 +1,6 @@
 from forms import UserCreateForm
 from forms import EventCreateForm
+from sponsorsManager.models import UserProfile
 from django.conf.urls import patterns, url
 from sponsorsManager import views
 
@@ -8,10 +9,7 @@ urlpatterns = patterns('',
     url(r'^auth/$', views.auth_view),
     url(r'^invalid/$', views.invalid, name='index'),
     url(r'^signup/$', 
-    	views.general_create, 
-    	{'generic_form':UserCreateForm,
-    	'template_name':'sponsorsManager/signup.html'
-    	},
+    	views.signup, 
     	name='signup'),
     url(r'^(?P<petition>\w{0,50})/$', 
     	views.main_controller, 
@@ -23,5 +21,7 @@ urlpatterns = patterns('',
     	'template_name': 'sponsorsManager/event_form.html'
     	},
     	 name='Add Event'),
+    url(r'^(?P<user_name>\w{0,50})/edit/$',
+        views.groot_user, name='Edit user'),
 
 )
