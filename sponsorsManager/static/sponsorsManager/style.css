@@ -13,7 +13,7 @@ html{
 h1.e404{
 
     text-align:center;
-    font-size:4.5em;
+    font-size:2.5em;
 
 }
 
@@ -27,6 +27,7 @@ html.e404{
 	background-size: cover;
 
 }
+
 
 #content-wrapper{
 
@@ -223,12 +224,16 @@ header{
 
 }
 
+.submit .submit{
 
+    display:inline;
+
+}
 .form-group input.submit{
 
     overflow:auto;
 	border-radius: 0px;
-	display: block;
+	display: inline;
 	font-size: 30px;
 
 }
@@ -277,6 +282,7 @@ header{
 
 #login-btn{
 
+    display:block;
     margin: 0 auto;
 
 }
