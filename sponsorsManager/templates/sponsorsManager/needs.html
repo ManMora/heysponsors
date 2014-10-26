@@ -13,19 +13,19 @@
 {% block content %}
 <div class="addevent">
 	<h1>Hello! {{user}}</h1>
-	<h1>Event selected: {{event.name}}</h1>
-	{% if event.Needs.count > 0 %}
+	<h1>Event selected: {{parent.name}}</h1>
+	{% if parent.Needs.count > 0 %}
 	<table>
 	<thead><tr><th>Needs</th></tr></thead>
-	{% for need in event.Needs.all %}
+	{% for need in parent.Needs.all %}
 	<tr>
 
-		<td><a href="/{{user}}/events/{{event}}/{{need.name}}">{{need.name}}</td></a>
+		<td><a href="/needs/{{need.id}}">{{need.name}}</td></a>
 		
 	</tr>
 	{% endfor %}
 	{% endif %}
-    <a href="/{{user}}/events/{{event}}/add_need/"><i class="fa fa-plus"  ></i>Add Need</a>
+    <a href="/events/{{parent.id}}/add_need/"><i class="fa fa-plus"></i>Add Need</a>
 	</table>
 </div>
 {% endblock %}
