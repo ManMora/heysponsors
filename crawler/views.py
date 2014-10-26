@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import requests
 from django.http import HttpResponse
 from django.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_exempt
 
 
 class result():
@@ -15,11 +16,11 @@ class result():
         self.email = email
         self.direccion = direccion
 
-
+@csrf_exempt
 def gettags(request):
 
-    if request.POST != None and request.POST.url != None:
-        htmlfile = urllib.urlopen(request.POST.url)
+    if request.POST != None and request.POST.get('url') != None:
+        htmlfile = urllib.urlopen(request.POST.get('url'))
         soup = BeautifulSoup(htmlfile)
         results = []
         vcards = soup.find_all("li", class_="vcard")
@@ -29,7 +30,8 @@ def gettags(request):
             else:
                 addr = None
             a = x.find_all("span",class_="tel")
-            tel = a[0].string
+            if len(a) > 0:
+                tel = a[0].string
 
             b = x.find_all("span",class_="street-address")
             if len(b)>0:

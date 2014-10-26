@@ -13,6 +13,8 @@ from forms import EventCreateForm, NeedsCreateForm
 from forms import UserEditForm
 from forms import UserProfileEditForm
 from sponsorsManager.models import UserProfile, Event
+import requests
+import json
 # Create your views here.
 
 
@@ -21,6 +23,8 @@ def main_controller(request, petition):
         return index(request)
     if petition == 'logout':
         return logout_view(request)
+    if petition == 'sponsors':
+        return getsponsors(request,request.user)
     if petition == '404':
         return render(request, 'sponsorsManager/404.html')
     if request.user.is_authenticated():
@@ -226,7 +230,19 @@ def create_needs(request, user_name, event_name, generic_form, template_name):
     forms = [form]
     return render(request, template_name, {'forms': forms, })
 
+def getsponsors(request,user_name):
 
+    if request.user.is_authenticated():
+        if request.method == "POST":
+            if'query' in request.POST :
+                events =  list(Event.objects.all())
+                payload = {'url': 'http://www.seccionamarilla.com.mx/resultados/'+request.POST.get('query')+'/1'}
+                r = requests.post("http://127.0.0.1:8000/crawler/gettags/", data=payload)
+                if r.content != None:
+                    return render(request,'sponsorsManager/getsponsors.html',{'events':events,'sponsors':json.loads(r.content)})
+        else:
+            events =  list(Event.objects.all())
+            return render(request,'sponsorsManager/getsponsors.html',{'events':events})
 
 def groot_user(request, user_name):
     if(request.user.is_authenticated()):
