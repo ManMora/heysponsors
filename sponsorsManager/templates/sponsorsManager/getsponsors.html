@@ -1,0 +1,49 @@
+{% extends "base_generic.html"  %}
+{% block content  %}
+
+<div class="generic-form">
+    <form method="post"  class="form-inline" role="form">{% csrf_token  %}
+
+        <div class="form-group">
+            <div class="input-group">
+            <div class="input-group-addon"> <i class="fa fa-search"  ></i>  </div>
+            <input class="form-control" type="text" name='query'  placeholder="Search for sponsors">
+            </div>
+        </div>
+    </form>
+    <table class="table"  >
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Add to Event</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sponsor in sponsors  %}
+        <tr>
+            <td>{{sponsor.result.name}}</td>
+            <td>{{sponsor.result.direccion}}</td>
+            <td>
+                <form class="form-inline" style="min-width:150px;"  action="/addsponsor/" method="post"  >
+                    <select>
+                            <option value="none">none</option>
+                        {% for event in events  %}
+                            <option value={{ event.id  }}>{{ event.name  }}</option>
+                        {% endfor  %}
+                    </select>
+                    <input name="name" type="text" value="{{sponsor.result.name}}" hidden >
+                    <input name="tel"  type="text" value="{{sponsor.result.tel}}" hidden >
+                    <input name="address" type="text" value="{{sponsor.result.direccion}}" hidden >
+                    <input name="photo" type="text" value="{{sponsor.result.logo}}" hidden >
+                        <input style="disply:inline" type="submit" />
+                </form>
+            </td>
+        </tr>
+        {% endfor  %}
+        </tbody>
+        </table>
+</div>
+
+{% endblock  %}
+

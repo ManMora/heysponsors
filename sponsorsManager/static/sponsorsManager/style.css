@@ -304,9 +304,3 @@ height: 100%;
 }
 
 
-::-webkit-input-placeholder {
-   text-align: center;
-   font-size: 30px;
-   vertical-align:top;
-   line-height: 30px;
-}
