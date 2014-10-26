@@ -11,7 +11,7 @@
 {% block actual %}Welcome!{% endblock %}
 
 {% block content %}
-<div class="addevent">
+<div class="generic-form">
 	<h1>Hello! {{user}}</h1>
 	<h1>Event selected: {{event.name}}</h1>
 	{% if event.Needs.count > 0 %}
@@ -21,7 +21,7 @@
 	<tr>
 
 		<td><a href="/{{user}}/events/{{event}}/{{need.name}}">{{need.name}}</td></a>
-		
+
 	</tr>
 	{% endfor %}
 	{% endif %}
