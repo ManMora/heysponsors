@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>forms</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;forms
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="forms-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="forms-module.html">Module forms</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">db</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module crawler.models=crawler.models-module.html,Module sponsorsManager.models=sponsorsManager.models-module.html"><a title="crawler.models
+sponsorsManager.models" class="py-name" href="#" onclick="return doclink('link-0', 'models', 'link-0');">models</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module forms=forms-module.html"><a title="forms" class="py-name" href="#" onclick="return doclink('link-1', 'forms', 'link-1');">forms</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">ModelForm</tt><tt class="py-op">,</tt> <tt class="py-name">Form</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-2', 'forms', 'link-1');">forms</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">sponsorsManager</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name"><a title="crawler.models
+sponsorsManager.models" class="py-name" href="#" onclick="return doclink('link-3', 'models', 'link-0');">models</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class sponsorsManager.models.UserProfile=sponsorsManager.models.UserProfile-class.html"><a title="sponsorsManager.models.UserProfile" class="py-name" href="#" onclick="return doclink('link-4', 'UserProfile', 'link-4');">UserProfile</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">sponsorsManager</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="crawler.models
+sponsorsManager.models" class="py-name" href="#" onclick="return doclink('link-5', 'models', 'link-0');">models</a></tt> <tt class="py-keyword">import</tt> <tt id="link-6" class="py-name" targets="Class sponsorsManager.models.Sponsors=sponsorsManager.models.Sponsors-class.html"><a title="sponsorsManager.models.Sponsors" class="py-name" href="#" onclick="return doclink('link-6', 'Sponsors', 'link-6');">Sponsors</a></tt><tt class="py-op">,</tt> <tt id="link-7" class="py-name" targets="Class sponsorsManager.models.Sponsorship=sponsorsManager.models.Sponsorship-class.html"><a title="sponsorsManager.models.Sponsorship" class="py-name" href="#" onclick="return doclink('link-7', 'Sponsorship', 'link-7');">Sponsorship</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">sponsorsManager</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="crawler.models
+sponsorsManager.models" class="py-name" href="#" onclick="return doclink('link-8', 'models', 'link-0');">models</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Class sponsorsManager.models.Event=sponsorsManager.models.Event-class.html"><a title="sponsorsManager.models.Event" class="py-name" href="#" onclick="return doclink('link-9', 'Event', 'link-9');">Event</a></tt><tt class="py-op">,</tt> <tt id="link-10" class="py-name" targets="Variable sponsorsManager.models.Event.Needs=sponsorsManager.models.Event-class.html#Needs,Class sponsorsManager.models.Needs=sponsorsManager.models.Needs-class.html"><a title="sponsorsManager.models.Event.Needs
+sponsorsManager.models.Needs" class="py-name" href="#" onclick="return doclink('link-10', 'Needs', 'link-10');">Needs</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">contrib</tt><tt class="py-op">.</tt><tt class="py-name">auth</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="crawler.models
+sponsorsManager.models" class="py-name" href="#" onclick="return doclink('link-11', 'models', 'link-0');">models</a></tt> <tt class="py-keyword">import</tt> <tt id="link-12" class="py-name" targets="Class django.contrib.auth.models.User=django.contrib.auth.models.User-class.html"><a title="django.contrib.auth.models.User" class="py-name" href="#" onclick="return doclink('link-12', 'User', 'link-12');">User</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">contrib</tt><tt class="py-op">.</tt><tt class="py-name">auth</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-13', 'forms', 'link-1');">forms</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">UserCreationForm</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="UserForm"></a><div id="UserForm-def"><a name="L10"></a><tt class="py-lineno">10</tt> <a class="py-toggle" href="#" id="UserForm-toggle" onclick="return toggle('UserForm');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.UserForm-class.html">UserForm</a><tt class="py-op">(</tt><tt class="py-base-class">forms</tt><tt class="py-op">.</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UserForm-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="UserForm-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">    <tt id="link-14" class="py-name" targets="Variable forms.UserEditForm.password=forms.UserEditForm-class.html#password,Variable forms.UserForm.password=forms.UserForm-class.html#password"><a title="forms.UserEditForm.password
+forms.UserForm.password" class="py-name" href="#" onclick="return doclink('link-14', 'password', 'link-14');">password</a></tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-15', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">widget</tt><tt class="py-op">=</tt><tt id="link-16" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-16', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">PasswordInput</tt><tt class="py-op">)</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="UserForm.Meta"></a><div id="UserForm.Meta-def"><a name="L13"></a><tt class="py-lineno">13</tt> <a class="py-toggle" href="#" id="UserForm.Meta-toggle" onclick="return toggle('UserForm.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.UserForm.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="UserForm.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="UserForm.Meta-expanded"><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt class="py-name">model</tt> <tt class="py-op">=</tt> <tt id="link-17" class="py-name"><a title="django.contrib.auth.models.User" class="py-name" href="#" onclick="return doclink('link-17', 'User', 'link-12');">User</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt id="link-18" class="py-name" targets="Variable forms.EventCreateForm.Meta.fields=forms.EventCreateForm.Meta-class.html#fields,Variable forms.EventReadForm.Meta.fields=forms.EventReadForm.Meta-class.html#fields,Variable forms.NeedsCreateForm.Meta.fields=forms.NeedsCreateForm.Meta-class.html#fields,Variable forms.SponsorshipCreateForm.Meta.fields=forms.SponsorshipCreateForm.Meta-class.html#fields,Variable forms.UserCreateForm.Meta.fields=forms.UserCreateForm.Meta-class.html#fields,Variable forms.UserEditForm.Meta.fields=forms.UserEditForm.Meta-class.html#fields,Variable forms.UserForm.Meta.fields=forms.UserForm.Meta-class.html#fields,Variable forms.UserProfileEditForm.Meta.fields=forms.UserProfileEditForm.Meta-class.html#fields"><a title="forms.EventCreateForm.Meta.fields
+forms.EventReadForm.Meta.fields
+forms.NeedsCreateForm.Meta.fields
+forms.SponsorshipCreateForm.Meta.fields
+forms.UserCreateForm.Meta.fields
+forms.UserEditForm.Meta.fields
+forms.UserForm.Meta.fields
+forms.UserProfileEditForm.Meta.fields" class="py-name" href="#" onclick="return doclink('link-18', 'fields', 'link-18');">fields</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">"username"</tt><tt class="py-op">,</tt><tt class="py-string">"email"</tt><tt class="py-op">,</tt> <tt class="py-string">"password"</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
+<a name="UserCreateForm"></a><div id="UserCreateForm-def"><a name="L17"></a><tt class="py-lineno">17</tt> <a class="py-toggle" href="#" id="UserCreateForm-toggle" onclick="return toggle('UserCreateForm');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.UserCreateForm-class.html">UserCreateForm</a><tt class="py-op">(</tt><tt class="py-base-class">forms</tt><tt class="py-op">.</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UserCreateForm-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="UserCreateForm-expanded"><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">    <tt class="py-docstring">"""email = forms.EmailField(</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">        max_length=75, widget=forms.TextInput(attrs={'placeholder': 'Email'}))</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">    organization = forms.CharField(</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">        max_length=140, widget=forms.TextInput(</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">            attrs={'placeholder': 'Organization'}))"""</tt> </tt>
+<a name="UserCreateForm.Meta"></a><div id="UserCreateForm.Meta-def"><a name="L23"></a><tt class="py-lineno">23</tt> <a class="py-toggle" href="#" id="UserCreateForm.Meta-toggle" onclick="return toggle('UserCreateForm.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.UserCreateForm.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="UserCreateForm.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="UserCreateForm.Meta-expanded"><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-name">model</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="sponsorsManager.models.UserProfile" class="py-name" href="#" onclick="return doclink('link-19', 'UserProfile', 'link-4');">UserProfile</a></tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt id="link-20" class="py-name"><a title="forms.EventCreateForm.Meta.fields
+forms.EventReadForm.Meta.fields
+forms.NeedsCreateForm.Meta.fields
+forms.SponsorshipCreateForm.Meta.fields
+forms.UserCreateForm.Meta.fields
+forms.UserEditForm.Meta.fields
+forms.UserForm.Meta.fields
+forms.UserProfileEditForm.Meta.fields" class="py-name" href="#" onclick="return doclink('link-20', 'fields', 'link-18');">fields</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="UserEditForm"></a><div id="UserEditForm-def"><a name="L27"></a><tt class="py-lineno">27</tt> <a class="py-toggle" href="#" id="UserEditForm-toggle" onclick="return toggle('UserEditForm');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.UserEditForm-class.html">UserEditForm</a><tt class="py-op">(</tt><tt class="py-base-class">forms</tt><tt class="py-op">.</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UserEditForm-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="UserEditForm-expanded"><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">    <tt id="link-21" class="py-name"><a title="forms.UserEditForm.password
+forms.UserForm.password" class="py-name" href="#" onclick="return doclink('link-21', 'password', 'link-14');">password</a></tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-22', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">widget</tt><tt class="py-op">=</tt><tt id="link-23" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-23', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">PasswordInput</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">    <tt id="link-24" class="py-name" targets="Variable forms.UserEditForm.first_name=forms.UserEditForm-class.html#first_name"><a title="forms.UserEditForm.first_name" class="py-name" href="#" onclick="return doclink('link-24', 'first_name', 'link-24');">first_name</a></tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-25', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">required</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt id="link-26" class="py-name" targets="Variable forms.UserEditForm.last_name=forms.UserEditForm-class.html#last_name"><a title="forms.UserEditForm.last_name" class="py-name" href="#" onclick="return doclink('link-26', 'last_name', 'link-26');">last_name</a></tt> <tt class="py-op">=</tt> <tt id="link-27" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-27', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">required</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="UserEditForm.Meta"></a><div id="UserEditForm.Meta-def"><a name="L31"></a><tt class="py-lineno">31</tt> <a class="py-toggle" href="#" id="UserEditForm.Meta-toggle" onclick="return toggle('UserEditForm.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.UserEditForm.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="UserEditForm.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="UserEditForm.Meta-expanded"><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-name">model</tt> <tt class="py-op">=</tt> <tt id="link-28" class="py-name"><a title="django.contrib.auth.models.User" class="py-name" href="#" onclick="return doclink('link-28', 'User', 'link-12');">User</a></tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt id="link-29" class="py-name"><a title="forms.EventCreateForm.Meta.fields
+forms.EventReadForm.Meta.fields
+forms.NeedsCreateForm.Meta.fields
+forms.SponsorshipCreateForm.Meta.fields
+forms.UserCreateForm.Meta.fields
+forms.UserEditForm.Meta.fields
+forms.UserForm.Meta.fields
+forms.UserProfileEditForm.Meta.fields" class="py-name" href="#" onclick="return doclink('link-29', 'fields', 'link-18');">fields</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">"first_name"</tt><tt class="py-op">,</tt> <tt class="py-string">"last_name"</tt><tt class="py-op">,</tt> <tt class="py-string">"email"</tt><tt class="py-op">,</tt> <tt class="py-string">"password"</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="UserProfileEditForm"></a><div id="UserProfileEditForm-def"><a name="L35"></a><tt class="py-lineno">35</tt> <a class="py-toggle" href="#" id="UserProfileEditForm-toggle" onclick="return toggle('UserProfileEditForm');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.UserProfileEditForm-class.html">UserProfileEditForm</a><tt class="py-op">(</tt><tt class="py-base-class">forms</tt><tt class="py-op">.</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UserProfileEditForm-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="UserProfileEditForm-expanded"><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt class="py-docstring">"""email = forms.EmailField(</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt class="py-docstring">        max_length=75, widget=forms.TextInput(attrs={'placeholder': 'Email'}))</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt class="py-docstring">    organization = forms.CharField(</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt class="py-docstring">        max_length=140, widget=forms.TextInput(</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt class="py-docstring">            attrs={'placeholder': 'Organization'}))"""</tt> </tt>
+<a name="UserProfileEditForm.Meta"></a><div id="UserProfileEditForm.Meta-def"><a name="L41"></a><tt class="py-lineno">41</tt> <a class="py-toggle" href="#" id="UserProfileEditForm.Meta-toggle" onclick="return toggle('UserProfileEditForm.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.UserProfileEditForm.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="UserProfileEditForm.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="UserProfileEditForm.Meta-expanded"><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-name">model</tt> <tt class="py-op">=</tt> <tt id="link-30" class="py-name"><a title="sponsorsManager.models.UserProfile" class="py-name" href="#" onclick="return doclink('link-30', 'UserProfile', 'link-4');">UserProfile</a></tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt id="link-31" class="py-name"><a title="forms.EventCreateForm.Meta.fields
+forms.EventReadForm.Meta.fields
+forms.NeedsCreateForm.Meta.fields
+forms.SponsorshipCreateForm.Meta.fields
+forms.UserCreateForm.Meta.fields
+forms.UserEditForm.Meta.fields
+forms.UserForm.Meta.fields
+forms.UserProfileEditForm.Meta.fields" class="py-name" href="#" onclick="return doclink('link-31', 'fields', 'link-18');">fields</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'organization'</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"> </tt>
+<a name="EventCreateForm"></a><div id="EventCreateForm-def"><a name="L46"></a><tt class="py-lineno">46</tt> <a class="py-toggle" href="#" id="EventCreateForm-toggle" onclick="return toggle('EventCreateForm');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.EventCreateForm-class.html">EventCreateForm</a><tt class="py-op">(</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EventCreateForm-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="EventCreateForm-expanded"><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">    <tt id="link-32" class="py-name" targets="Variable forms.EventCreateForm.description=forms.EventCreateForm-class.html#description,Variable forms.EventReadForm.description=forms.EventReadForm-class.html#description,Variable sponsorsManager.models.Benefit.description=sponsorsManager.models.Benefit-class.html#description,Variable sponsorsManager.models.Concession.description=sponsorsManager.models.Concession-class.html#description,Variable sponsorsManager.models.Event.description=sponsorsManager.models.Event-class.html#description,Variable sponsorsManager.models.Needs.description=sponsorsManager.models.Needs-class.html#description,Variable sponsorsManager.models.Sponsor_cat.description=sponsorsManager.models.Sponsor_cat-class.html#description"><a title="forms.EventCreateForm.description
+forms.EventReadForm.description
+sponsorsManager.models.Benefit.description
+sponsorsManager.models.Concession.description
+sponsorsManager.models.Event.description
+sponsorsManager.models.Needs.description
+sponsorsManager.models.Sponsor_cat.description" class="py-name" href="#" onclick="return doclink('link-32', 'description', 'link-32');">description</a></tt> <tt class="py-op">=</tt> <tt id="link-33" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-33', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">required</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-name">widget</tt><tt class="py-op">=</tt><tt id="link-34" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-34', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">Textarea</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">    <tt id="link-35" class="py-name" targets="Variable forms.EventCreateForm.link_map=forms.EventCreateForm-class.html#link_map,Variable forms.EventReadForm.link_map=forms.EventReadForm-class.html#link_map,Variable sponsorsManager.models.Event.link_map=sponsorsManager.models.Event-class.html#link_map"><a title="forms.EventCreateForm.link_map
+forms.EventReadForm.link_map
+sponsorsManager.models.Event.link_map" class="py-name" href="#" onclick="return doclink('link-35', 'link_map', 'link-35');">link_map</a></tt> <tt class="py-op">=</tt> <tt id="link-36" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-36', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">required</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">    <tt id="link-37" class="py-name" targets="Variable forms.EventCreateForm.url_event=forms.EventCreateForm-class.html#url_event,Variable forms.EventReadForm.url_event=forms.EventReadForm-class.html#url_event,Variable sponsorsManager.models.Event.url_event=sponsorsManager.models.Event-class.html#url_event"><a title="forms.EventCreateForm.url_event
+forms.EventReadForm.url_event
+sponsorsManager.models.Event.url_event" class="py-name" href="#" onclick="return doclink('link-37', 'url_event', 'link-37');">url_event</a></tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-38', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">URLField</tt><tt class="py-op">(</tt><tt class="py-name">required</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">    <tt id="link-39" class="py-name" targets="Variable forms.EventCreateForm.goal=forms.EventCreateForm-class.html#goal,Variable forms.EventReadForm.goal=forms.EventReadForm-class.html#goal,Variable sponsorsManager.models.Event.goal=sponsorsManager.models.Event-class.html#goal"><a title="forms.EventCreateForm.goal
+forms.EventReadForm.goal
+sponsorsManager.models.Event.goal" class="py-name" href="#" onclick="return doclink('link-39', 'goal', 'link-39');">goal</a></tt> <tt class="py-op">=</tt> <tt id="link-40" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-40', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">required</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-name">widget</tt><tt class="py-op">=</tt><tt id="link-41" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-41', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">Textarea</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"> </tt>
+<a name="EventCreateForm.Meta"></a><div id="EventCreateForm.Meta-def"><a name="L52"></a><tt class="py-lineno">52</tt> <a class="py-toggle" href="#" id="EventCreateForm.Meta-toggle" onclick="return toggle('EventCreateForm.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.EventCreateForm.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="EventCreateForm.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="EventCreateForm.Meta-expanded"><a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">        <tt class="py-name">model</tt> <tt class="py-op">=</tt> <tt id="link-42" class="py-name"><a title="sponsorsManager.models.Event" class="py-name" href="#" onclick="return doclink('link-42', 'Event', 'link-9');">Event</a></tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">        <tt id="link-43" class="py-name"><a title="forms.EventCreateForm.Meta.fields
+forms.EventReadForm.Meta.fields
+forms.NeedsCreateForm.Meta.fields
+forms.SponsorshipCreateForm.Meta.fields
+forms.UserCreateForm.Meta.fields
+forms.UserEditForm.Meta.fields
+forms.UserForm.Meta.fields
+forms.UserProfileEditForm.Meta.fields" class="py-name" href="#" onclick="return doclink('link-43', 'fields', 'link-18');">fields</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'name'</tt><tt class="py-op">,</tt> <tt class="py-string">'description'</tt><tt class="py-op">,</tt> <tt class="py-string">'date'</tt><tt class="py-op">,</tt> <tt class="py-string">'duration'</tt><tt class="py-op">,</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">                        <tt class="py-string">'link_map'</tt><tt class="py-op">,</tt> <tt class="py-string">'url_event'</tt><tt class="py-op">,</tt> <tt class="py-string">'budget'</tt><tt class="py-op">,</tt> <tt class="py-string">'goal'</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"> </tt>
+<a name="EventReadForm"></a><div id="EventReadForm-def"><a name="L58"></a><tt class="py-lineno">58</tt> <a class="py-toggle" href="#" id="EventReadForm-toggle" onclick="return toggle('EventReadForm');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.EventReadForm-class.html">EventReadForm</a><tt class="py-op">(</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EventReadForm-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="EventReadForm-expanded"><a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">    <tt id="link-44" class="py-name"><a title="forms.EventCreateForm.description
+forms.EventReadForm.description
+sponsorsManager.models.Benefit.description
+sponsorsManager.models.Concession.description
+sponsorsManager.models.Event.description
+sponsorsManager.models.Needs.description
+sponsorsManager.models.Sponsor_cat.description" class="py-name" href="#" onclick="return doclink('link-44', 'description', 'link-32');">description</a></tt> <tt class="py-op">=</tt> <tt id="link-45" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-45', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">required</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-name">widget</tt><tt class="py-op">=</tt><tt id="link-46" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-46', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">Textarea</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">    <tt id="link-47" class="py-name"><a title="forms.EventCreateForm.link_map
+forms.EventReadForm.link_map
+sponsorsManager.models.Event.link_map" class="py-name" href="#" onclick="return doclink('link-47', 'link_map', 'link-35');">link_map</a></tt> <tt class="py-op">=</tt> <tt id="link-48" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-48', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">required</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">    <tt id="link-49" class="py-name"><a title="forms.EventCreateForm.url_event
+forms.EventReadForm.url_event
+sponsorsManager.models.Event.url_event" class="py-name" href="#" onclick="return doclink('link-49', 'url_event', 'link-37');">url_event</a></tt> <tt class="py-op">=</tt> <tt id="link-50" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-50', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">URLField</tt><tt class="py-op">(</tt><tt class="py-name">required</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">    <tt id="link-51" class="py-name"><a title="forms.EventCreateForm.goal
+forms.EventReadForm.goal
+sponsorsManager.models.Event.goal" class="py-name" href="#" onclick="return doclink('link-51', 'goal', 'link-39');">goal</a></tt> <tt class="py-op">=</tt> <tt id="link-52" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-52', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">required</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-name">widget</tt><tt class="py-op">=</tt><tt id="link-53" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-53', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">Textarea</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"> </tt>
+<a name="EventReadForm.Meta"></a><div id="EventReadForm.Meta-def"><a name="L65"></a><tt class="py-lineno">65</tt> <a class="py-toggle" href="#" id="EventReadForm.Meta-toggle" onclick="return toggle('EventReadForm.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.EventReadForm.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="EventReadForm.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="EventReadForm.Meta-expanded"><a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">        <tt class="py-name">model</tt> <tt class="py-op">=</tt> <tt id="link-54" class="py-name"><a title="sponsorsManager.models.Event" class="py-name" href="#" onclick="return doclink('link-54', 'Event', 'link-9');">Event</a></tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">        <tt id="link-55" class="py-name"><a title="forms.EventCreateForm.Meta.fields
+forms.EventReadForm.Meta.fields
+forms.NeedsCreateForm.Meta.fields
+forms.SponsorshipCreateForm.Meta.fields
+forms.UserCreateForm.Meta.fields
+forms.UserEditForm.Meta.fields
+forms.UserForm.Meta.fields
+forms.UserProfileEditForm.Meta.fields" class="py-name" href="#" onclick="return doclink('link-55', 'fields', 'link-18');">fields</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'name'</tt><tt class="py-op">,</tt> <tt class="py-string">'description'</tt><tt class="py-op">,</tt> <tt class="py-string">'date'</tt><tt class="py-op">,</tt> <tt class="py-string">'duration'</tt><tt class="py-op">,</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">            <tt class="py-string">'link_map'</tt><tt class="py-op">,</tt> <tt class="py-string">'url_event'</tt><tt class="py-op">,</tt> <tt class="py-string">'budget'</tt><tt class="py-op">,</tt> <tt class="py-string">'goal'</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line"> </tt>
+<a name="NeedsCreateForm"></a><div id="NeedsCreateForm-def"><a name="L70"></a><tt class="py-lineno">70</tt> <a class="py-toggle" href="#" id="NeedsCreateForm-toggle" onclick="return toggle('NeedsCreateForm');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.NeedsCreateForm-class.html">NeedsCreateForm</a><tt class="py-op">(</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NeedsCreateForm-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="NeedsCreateForm-expanded"><a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">    <tt id="link-56" class="py-name" targets="Variable forms.NeedsCreateForm.event=forms.NeedsCreateForm-class.html#event,Variable sponsorsManager.models.Needs.event=sponsorsManager.models.Needs-class.html#event,Variable sponsorsManager.models.Sponsorship.event=sponsorsManager.models.Sponsorship-class.html#event"><a title="forms.NeedsCreateForm.event
+sponsorsManager.models.Needs.event
+sponsorsManager.models.Sponsorship.event" class="py-name" href="#" onclick="return doclink('link-56', 'event', 'link-56');">event</a></tt> <tt class="py-op">=</tt> <tt id="link-57" class="py-name"><a title="crawler.models
+sponsorsManager.models" class="py-name" href="#" onclick="return doclink('link-57', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">ForeignKey</tt><tt class="py-op">(</tt><tt class="py-string">'Event'</tt><tt class="py-op">,</tt> <tt class="py-name">related_name</tt><tt class="py-op">=</tt><tt class="py-string">"Needs"</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">    <tt id="link-58" class="py-name" targets="Variable forms.NeedsCreateForm.name=forms.NeedsCreateForm-class.html#name,Variable sponsorsManager.models.Benefit.name=sponsorsManager.models.Benefit-class.html#name,Variable sponsorsManager.models.Concession.name=sponsorsManager.models.Concession-class.html#name,Variable sponsorsManager.models.Event.name=sponsorsManager.models.Event-class.html#name,Variable sponsorsManager.models.Needs.name=sponsorsManager.models.Needs-class.html#name,Variable sponsorsManager.models.Sponsor_cat.name=sponsorsManager.models.Sponsor_cat-class.html#name,Variable sponsorsManager.models.Sponsors.name=sponsorsManager.models.Sponsors-class.html#name"><a title="forms.NeedsCreateForm.name
+sponsorsManager.models.Benefit.name
+sponsorsManager.models.Concession.name
+sponsorsManager.models.Event.name
+sponsorsManager.models.Needs.name
+sponsorsManager.models.Sponsor_cat.name
+sponsorsManager.models.Sponsors.name" class="py-name" href="#" onclick="return doclink('link-58', 'name', 'link-58');">name</a></tt> <tt class="py-op">=</tt> <tt id="link-59" class="py-name"><a title="crawler.models
+sponsorsManager.models" class="py-name" href="#" onclick="return doclink('link-59', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">max_length</tt><tt class="py-op">=</tt><tt class="py-number">140</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line"> </tt>
+<a name="NeedsCreateForm.Meta"></a><div id="NeedsCreateForm.Meta-def"><a name="L74"></a><tt class="py-lineno">74</tt> <a class="py-toggle" href="#" id="NeedsCreateForm.Meta-toggle" onclick="return toggle('NeedsCreateForm.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.NeedsCreateForm.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="NeedsCreateForm.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="NeedsCreateForm.Meta-expanded"><a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">        <tt class="py-name">model</tt> <tt class="py-op">=</tt> <tt id="link-60" class="py-name"><a title="sponsorsManager.models.Event.Needs
+sponsorsManager.models.Needs" class="py-name" href="#" onclick="return doclink('link-60', 'Needs', 'link-10');">Needs</a></tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">        <tt id="link-61" class="py-name"><a title="forms.EventCreateForm.Meta.fields
+forms.EventReadForm.Meta.fields
+forms.NeedsCreateForm.Meta.fields
+forms.SponsorshipCreateForm.Meta.fields
+forms.UserCreateForm.Meta.fields
+forms.UserEditForm.Meta.fields
+forms.UserForm.Meta.fields
+forms.UserProfileEditForm.Meta.fields" class="py-name" href="#" onclick="return doclink('link-61', 'fields', 'link-18');">fields</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'name'</tt><tt class="py-op">,</tt> <tt class="py-string">'description'</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line"> </tt>
+<a name="SponsorshipCreateForm"></a><div id="SponsorshipCreateForm-def"><a name="L78"></a><tt class="py-lineno">78</tt> <a class="py-toggle" href="#" id="SponsorshipCreateForm-toggle" onclick="return toggle('SponsorshipCreateForm');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.SponsorshipCreateForm-class.html">SponsorshipCreateForm</a><tt class="py-op">(</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SponsorshipCreateForm-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="SponsorshipCreateForm-expanded"><a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">    <tt id="link-62" class="py-name" targets="Variable forms.SponsorshipCreateForm.benefits_2=forms.SponsorshipCreateForm-class.html#benefits_2"><a title="forms.SponsorshipCreateForm.benefits_2" class="py-name" href="#" onclick="return doclink('link-62', 'benefits_2', 'link-62');">benefits_2</a></tt> <tt class="py-op">=</tt> <tt id="link-63" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-63', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">widget</tt><tt class="py-op">=</tt><tt id="link-64" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-64', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">Textarea</tt><tt class="py-op">,</tt> <tt class="py-name">required</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">    <tt id="link-65" class="py-name" targets="Variable forms.SponsorshipCreateForm.concesions_2=forms.SponsorshipCreateForm-class.html#concesions_2"><a title="forms.SponsorshipCreateForm.concesions_2" class="py-name" href="#" onclick="return doclink('link-65', 'concesions_2', 'link-65');">concesions_2</a></tt> <tt class="py-op">=</tt> <tt id="link-66" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-66', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">widget</tt><tt class="py-op">=</tt><tt id="link-67" class="py-name"><a title="forms" class="py-name" href="#" onclick="return doclink('link-67', 'forms', 'link-1');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">Textarea</tt><tt class="py-op">,</tt> <tt class="py-name">required</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="SponsorshipCreateForm.Meta"></a><div id="SponsorshipCreateForm.Meta-def"><a name="L81"></a><tt class="py-lineno">81</tt> <a class="py-toggle" href="#" id="SponsorshipCreateForm.Meta-toggle" onclick="return toggle('SponsorshipCreateForm.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="forms.SponsorshipCreateForm.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="SponsorshipCreateForm.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="SponsorshipCreateForm.Meta-expanded"><a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">        <tt class="py-name">model</tt> <tt class="py-op">=</tt> <tt id="link-68" class="py-name"><a title="sponsorsManager.models.Sponsors" class="py-name" href="#" onclick="return doclink('link-68', 'Sponsors', 'link-6');">Sponsors</a></tt> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line">        <tt id="link-69" class="py-name"><a title="forms.EventCreateForm.Meta.fields
+forms.EventReadForm.Meta.fields
+forms.NeedsCreateForm.Meta.fields
+forms.SponsorshipCreateForm.Meta.fields
+forms.UserCreateForm.Meta.fields
+forms.UserEditForm.Meta.fields
+forms.UserForm.Meta.fields
+forms.UserProfileEditForm.Meta.fields" class="py-name" href="#" onclick="return doclink('link-69', 'fields', 'link-18');">fields</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'benefits_2'</tt><tt class="py-op">,</tt> <tt class="py-string">'concesions_2'</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Oct 29 01:20:14 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

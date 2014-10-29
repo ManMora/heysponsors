@@ -1,8 +1,9 @@
 from django.db import models
-from django.forms import ModelForm
+from django.forms import ModelForm, Form
 from django import forms
-from sponsorsManager.models import UserProfile
-from sponsorsManager.models import Event, Needs
+from sponsorsManager.models import UserProfile, Concession
+from sponsorsManager.models import Sponsors, Sponsorship
+from sponsorsManager.models import Event, Needs, Benefit
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -14,11 +15,6 @@ class UserForm(forms.ModelForm):
         fields = ["username","email", "password"]
 
 class UserCreateForm(forms.ModelForm):
-    """email = forms.EmailField(
-        max_length=75, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
-    organization = forms.CharField(
-        max_length=140, widget=forms.TextInput(
-            attrs={'placeholder': 'Organization'}))"""
     class Meta:
         model = UserProfile
         fields = []
@@ -32,11 +28,6 @@ class UserEditForm(forms.ModelForm):
         fields = ["first_name", "last_name", "email", "password"]
 
 class UserProfileEditForm(forms.ModelForm):
-    """email = forms.EmailField(
-        max_length=75, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
-    organization = forms.CharField(
-        max_length=140, widget=forms.TextInput(
-            attrs={'placeholder': 'Organization'}))"""
     class Meta:
         model = UserProfile
         fields = ['organization']
@@ -73,3 +64,21 @@ class NeedsCreateForm(ModelForm):
     class Meta:
         model = Needs
         fields = ['name', 'description']
+
+class SponsorshipCreateForm(ModelForm):
+    benefits_2 = forms.CharField(widget=forms.Textarea, required=False)
+    concesions_2 = forms.CharField(widget=forms.Textarea, required=False)
+    class Meta:
+        model = Sponsors
+        fields = ['benefits_2', 'concesions_2']
+
+class BenefitsCreateForm(ModelForm):
+    class Meta:
+        model = Benefit
+        fields = ['name', 'description']
+
+class ConcessionsCreateForm(ModelForm):
+    class Meta:
+        model = Concession
+        fields = ['name', 'description']
+

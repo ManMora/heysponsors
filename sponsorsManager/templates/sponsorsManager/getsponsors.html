@@ -25,11 +25,12 @@
             <td>{{sponsor.result.name}}</td>
             <td>{{sponsor.result.direccion}}</td>
             <td>
-                <form class="form-inline" style="min-width:150px;"  action="/addsponsor/" method="post"  >
-                    <select>
+                <form class="form-inline" style="min-width:150px;"  action="/add_sponsorship/" method="post"  >
+                {% csrf_token  %}
+                    <select name="dropdown">
                             <option value="none">none</option>
                         {% for event in events  %}
-                            <option value={{ event.id  }}>{{ event.name  }}</option>
+                            <option value='{{ event.id }}'>{{ event.name }}</option>
                         {% endfor  %}
                     </select>
                     <input name="name" type="text" value="{{sponsor.result.name}}" hidden >
