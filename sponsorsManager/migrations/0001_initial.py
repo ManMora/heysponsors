@@ -2,9 +2,9 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from django.conf import settings
 import phonenumber_field.modelfields
 import datetime
-from django.conf import settings
 
 
 class Migration(migrations.Migration):
@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Benefit',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=140)),
                 ('description', models.TextField()),
             ],
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Concession',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=140)),
                 ('description', models.TextField()),
             ],
@@ -43,17 +43,16 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Event',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=140)),
                 ('description', models.TextField()),
-                ('date', models.DateTimeField(default=datetime.datetime(2014, 9, 10, 6, 55, 27, 819274))),
+                ('date', models.DateTimeField(default=datetime.datetime(2014, 10, 28, 17, 6, 3, 793722))),
                 ('duration', models.TimeField()),
                 ('link_map', models.CharField(max_length=140)),
                 ('url_event', models.URLField(max_length=140)),
                 ('budget', models.IntegerField()),
                 ('goal', models.TextField()),
-                ('team_members', models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
-                ('user', models.ForeignKey(related_name='Events', to=settings.AUTH_USER_MODEL)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='Events')),
             ],
             options={
                 'verbose_name_plural': 'Events',
@@ -64,10 +63,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Needs',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=140)),
                 ('description', models.TextField()),
-                ('event', models.ForeignKey(related_name='Needs', to='sponsorsManager.Event')),
+                ('event', models.ForeignKey(to='sponsorsManager.Event', related_name='Needs')),
             ],
             options={
                 'verbose_name_plural': 'Needs',
@@ -78,7 +77,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Sponsor_cat',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=140)),
                 ('description', models.TextField()),
             ],
@@ -91,7 +90,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Sponsors',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=140)),
                 ('logo', models.ImageField(upload_to='')),
                 ('tel', phonenumber_field.modelfields.PhoneNumberField(max_length=128)),
@@ -108,11 +107,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Sponsorship',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
-                ('benefits', models.ForeignKey(related_name='Sponsorship', to='sponsorsManager.Benefit')),
-                ('concesions', models.ForeignKey(related_name='Sponsorship', to='sponsorsManager.Concession')),
-                ('event', models.ForeignKey(related_name='Sponsorship', to='sponsorsManager.Event')),
-                ('sponsor', models.ForeignKey(related_name='Sponsorship', to='sponsorsManager.Sponsors')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('benefits', models.ForeignKey(to='sponsorsManager.Benefit', related_name='Sponsorship')),
+                ('concesions', models.ForeignKey(to='sponsorsManager.Concession', related_name='Sponsorship')),
+                ('event', models.ForeignKey(to='sponsorsManager.Event', related_name='Sponsorship')),
+                ('sponsor', models.ForeignKey(to='sponsorsManager.Sponsors', related_name='Sponsorship')),
             ],
             options={
                 'verbose_name_plural': 'Sponsorships',
@@ -123,14 +122,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='UserProfile',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('location_latitud', models.CharField(max_length=140)),
                 ('location_altitud', models.CharField(max_length=140)),
                 ('organization', models.CharField(max_length=140)),
-                ('user', models.ForeignKey(related_name='user_data', unique=True, to=settings.AUTH_USER_MODEL)),
+                ('active', models.BooleanField(default=1)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='user_data', unique=True)),
             ],
             options={
-                'verbose_name': 'user_data',
+                'verbose_name': 'User',
             },
             bases=(models.Model,),
         ),
