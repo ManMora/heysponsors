@@ -63,11 +63,13 @@ class Sponsors(models.Model):
     tel = PhoneNumberField()
     email = models.EmailField()
     direccion = models.CharField(max_length=140)
-    categoria = models.ForeignKey('Sponsor_cat')
 
     class Meta:
         verbose_name = "Sponsor"
         verbose_name_plural = "Sponsors"
+
+    def __str__(self):
+        return self.name + " , " + self.direccion
 
 
 class Sponsor_cat(models.Model):
@@ -78,6 +80,9 @@ class Sponsor_cat(models.Model):
         verbose_name = "Category"
         verbose_name_plural = "Categories"
 
+    def __str__(self):
+        return self.name
+
 
 class Benefit(models.Model):
     name = models.CharField(max_length=140)
@@ -86,6 +91,9 @@ class Benefit(models.Model):
     class Meta:
         verbose_name = "Benefit"
         verbose_name_plural = "Benefits"
+
+    def __str__(self):
+        return self.name
 
 
 class Concession(models.Model):
@@ -96,13 +104,19 @@ class Concession(models.Model):
         verbose_name = "Concession"
         verbose_name_plural = "Concessions"
 
+    def __str__(self):
+        return self.name
+
 
 class Sponsorship(models.Model):
-    sponsor = models.ForeignKey('Sponsors', related_name='Sponsorship')
-    event = models.ForeignKey('Event', related_name='Sponsorship')
-    benefits = models.ForeignKey('Benefit', related_name='Sponsorship')
-    concesions = models.ForeignKey('Concession', related_name='Sponsorship')
+    sponsor = models.ForeignKey('Sponsors', related_name='Sponsorships')
+    event = models.ForeignKey('Event', related_name='Sponsorships')
+    benefits = models.ForeignKey('Benefit', related_name='Sponsorships')
+    concesions = models.ForeignKey('Concession', related_name='Sponsorships')
 
     class Meta:
         verbose_name = "Sponsorship"
         verbose_name_plural = "Sponsorships"
+
+    def __str__(self):
+        return str(self.sponsor) + str(self.event)

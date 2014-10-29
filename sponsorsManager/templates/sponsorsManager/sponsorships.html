@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+{% block nav_actual %}
+<ul class="nav navbar-nav">
+	<li class=""><a href="/{{user}}">Profile</a></li>
+	<li class=""><a href="/logout">Logout</a></li>
+</ul>
+{% endblock %}
+{% block html-customs  %}logged-in{% endblock  %}
+
+{% block title %}Hey! sponsors{% endblock %}
+{% block actual %}Welcome!{% endblock %}
+
+{% block content %}
+<div class="generic-form">
+	<h1>Hello! {{user}}</h1>
+	<h1>Event selected: {{parent.name}}</h1>
+	<table>
+		{% if parent.Sponsorships.count > 0 %}
+		<thead><tr><th>---------</th><th>Sponsor</th><th>---------</th><th>Benefits</th><th>---------</th><th>Concessions</th><th>---------</th><th>Edit</th></tr></thead>
+			{% for sponsorship in parent.Sponsorships.all %}
+			<tr>
+				<td></td>
+				<td>{{sponsorship.sponsor.name}}</td>
+				<td></td>
+				<td><a href="/benefits/{{sponsorship.benefits.id}}">{{sponsorship.benefits}}</a></td>
+				<td></td>
+				<td><a href="/concession/{{sponsorship.concesions.id}}">{{sponsorship.concesions}}</a></td>
+				<td></td>
+				<td><a href="/sponsorship/{{sponsorship.id}}">Detail</a></td>
+			</tr>
+			{% endfor %}
+			{% else %}
+			<div>There are no sponsorships for {{parent}} yet</div>
+			<div>Search a <a href="/sponsors"><u>sponsor</u></a> in order to start the interaction</div>
+		{% endif %}
+	</table>
+</div>
+{% endblock %}
+

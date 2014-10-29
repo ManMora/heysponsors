@@ -1,9 +1,9 @@
 {% extends "base_generic.html" %}
 {% block nav_actual %}
-	<ul class="nav navbar-nav">
-	    <li class=""><a href="/{{user}}">Profile</a></li>
-	    <li class=""><a href="/logout">Logout</a></li>
-	</ul>
+<ul class="nav navbar-nav">
+	<li class=""><a href="/{{user}}">Profile</a></li>
+	<li class=""><a href="/logout">Logout</a></li>
+</ul>
 {% endblock %}
 {% block html-customs  %}logged-in{% endblock  %}
 
@@ -16,14 +16,14 @@
 	<h1>Event selected: {{parent.name}}</h1>
 	{% if parent.Needs.count > 0 %}
 	<table>
-	<thead><tr><th>Needs</th></tr></thead>
-	{% for need in parent.Needs.all %}
-	<tr>
-		<td><a href="/needs/{{need.id}}">{{need.name}}</td></a>
-	</tr>
-	{% endfor %}
-	{% endif %}
-    <a href="/events/{{parent.id}}/add_need/"><i class="fa fa-plus"></i>Add Need</a>
+		<thead><tr><th>Needs</th></tr></thead>
+		{% for need in parent.Needs.all %}
+		<tr>
+			<td><a href="/needs/{{need.id}}">{{need.name}}</td></a>
+		</tr>
+		{% endfor %}
+		{% endif %}
+		<a href="/events/{{parent.id}}/add_need/"><i class="fa fa-plus"></i>Add Need</a>
 	</table>
 </div>
 {% endblock %}

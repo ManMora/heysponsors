@@ -6,60 +6,73 @@
 {% load widget_tweaks %}
 {% block content %}
 <div class="generic-form">
-<h1>{% block form_title %}{% endblock %}</h1>
-{% if success_message  %}
-    <div class="alert alert-success">{{ success_message }}</div>
-{% endif  %}
-<form method="post" action="">{% csrf_token %}
-					{% for form in forms %}
-					{% if form.errors %}
-                    {% for error in form.non_field_errors %}
-					<div class="alert alert-danger">
-						<strong>{{ error|escape }}</strong>
-					</div>
-					{% endfor %}
-					{% endif %}
+	<h1>{% block form_title %}{% endblock %}</h1>
+	{% if success_message  %}
+	<div class="alert alert-success">{{ success_message }}</div>
+	{% endif  %}
+	<form method="post" action="">{% csrf_token %}
+		{% for form in forms %}
+		{% if form.errors %}
+		{% for error in form.non_field_errors %}
+		<div class="alert alert-danger">
+			<strong>{{ error|escape }}</strong>
+		</div>
+		{% endfor %}
+		{% endif %}
 
-                    {% for field in form %}
-					<div class="form-group">
-                    {% if form.errors  %}
-					{% for error in field.errors %}
-					<div class="alert alert-danger">
-						<strong>{{ error|escape }}</strong>
-					</div>
-                    {% endfor %}
-                    {% endif  %}
-                    {% with pholder="placeholder:"|add:field.name.capitalize %}
-										{% if 'Password' in pholder %}
-											{% with pholder="placeholder:Password" %}
+		{% for field in form %}
+		<div class="form-group">
+			{% if form.errors  %}
+			{% for error in field.errors %}
+			<div class="alert alert-danger">
+				<strong>{{ error|escape }}</strong>
+			</div>
+			{% endfor %}
+			{% endif  %}
+			{% with pholder="placeholder:"|add:field.name.capitalize %}
+			{% if 'Password' in pholder %}
+			{% with pholder="placeholder:Password" %}
 
-												{{ field|add_class:"field"|attr:pholder}}
+			{{ field|add_class:"field"|attr:pholder}}
 
-											{% endwith%}
-										{% elif 'First_name' in pholder %}
-											{% with pholder="placeholder:First name" %}
+			{% endwith%}
+			{% elif 'First_name' in pholder %}
+			{% with pholder="placeholder:First name" %}
 
-												{{ field|add_class:"field"|attr:pholder}}
+			{{ field|add_class:"field"|attr:pholder}}
 
-											{% endwith%}
-										{% elif 'Last_name' in pholder %}
-											{% with pholder="placeholder:First name" %}
+			{% endwith%}
+			{% elif 'Last_name' in pholder %}
+			{% with pholder="placeholder:First name" %}
 
-												{{ field|add_class:"field"|attr:pholder}}
+			{{ field|add_class:"field"|attr:pholder}}
 
-											{% endwith%}
-										{% else %}
+			{% endwith%}
+			{% elif 'Benefits_2' in pholder %}
+			{% with pholder="placeholder: Benefits with sponsor" %}
 
-											{{ field|add_class:"field"|attr:pholder}}
-										{% endif %}
-					            	{% endwith%}
-					            </div>
-					{% endfor %}
-				{% endfor %}
-					{% block buttons %}
+			{{ field|add_class:"field"|attr:pholder}}
 
-					{% endblock %}
-				</form>
+			{% endwith%}
+
+			{% elif 'Concesions' in pholder %}
+			{% with pholder="placeholder: Concesions with sponsor" %}
+
+			{{ field|add_class:"field"|attr:pholder}}
+
+			{% endwith%}
+			{% else %}
+
+			{{ field|add_class:"field"|attr:pholder}}
+			{% endif %}
+			{% endwith%}
+		</div>
+		{% endfor %}
+		{% endfor %}
+		{% block buttons %}
+
+		{% endblock %}
+	</form>
 </div>
 
 {% endblock %}

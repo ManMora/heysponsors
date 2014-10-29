@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+{% block nav_actual %}
+<ul class="nav navbar-nav">
+	<li class=""><a href="/{{user}}">Profile</a></li>
+	<li class=""><a href="/logout">Logout</a></li>
+</ul>
+{% endblock %}
+{% block html-customs  %}logged-in{% endblock  %}
+
+{% block title %}Hey! sponsors{% endblock %}
+{% block actual %}Welcome!{% endblock %}
+
+{% block content %}
+<div class="generic-form">
+	<h1>Sponsorship Detail</h1>
+	<h2>Sponsorship event: <a href="/events/{{sponsorship.event.id}}"> <u>{{sponsorship.event}}</u></a></h2>
+	<h2>Sponsorship Sponsor: {{sponsorship.sponsor.name}}</h2>
+	<h2>Sponsorship Sponsor's address: {{sponsorship.sponsor.direccion}}</h2>
+	<h2>Sponsorship Sponsor's phone: {{sponsorship.sponsor.tel}}</h2>
+	<h2>Sponsorship Benefits: <a href="/benefits/{{sponsorship.benefits.id}}"><u>{{sponsorship.benefits}}</u></a></h2>
+	<h2>Sponsorship Concessions: <a href="/concession/{{sponsorship.concesions.id}}"><u>{{sponsorship.concesions}}</u></a></h2>
+	<a href="/sponsorship/{{sponsorship.id}}/delete"><button class="btn btn-danger submit">Delete</button></a>
+</div>
+{% endblock %}
+

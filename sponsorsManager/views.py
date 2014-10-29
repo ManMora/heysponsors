@@ -9,7 +9,9 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from forms import UserCreateForm, UserForm, EventCreateForm, EventReadForm
 from forms import NeedsCreateForm, UserEditForm, UserProfileEditForm
-from sponsorsManager.models import UserProfile, Event, Needs
+from forms import SponsorshipCreateForm
+from sponsorsManager.models import UserProfile, Event, Benefit
+from sponsorsManager.models import Needs, Sponsors, Sponsorship, Concession
 import requests
 import json
 # Create your views here.
@@ -23,6 +25,8 @@ def main_controller(request, petition):
         return logout_view(request)
     if petition == 'sponsors':
         return getsponsors(request)
+    if petition == 'add_sponsorship':
+        return add_sponsorship(request, -1, -1)
     if petition == '404':
         return render(request, 'sponsorsManager/404.html')
     if petition == 'my_events':
@@ -159,8 +163,16 @@ def list_needs(request, instance_id):
         event)
 
 
+def list_sponsorships(request, instance_id):
+    event = Event.objects.get(id=instance_id)
+    return list_objects(
+        request,
+        'sponsorsManager/sponsorships.html',
+        event)
+
+
 def general_create(request, instance_id, generic_model, generic_form,
-                   template_name):
+                   template_name, auxiliar_id):
     form = generic_form()
     if request.method == 'POST':
         form = generic_form(request.POST)
@@ -174,6 +186,36 @@ def general_create(request, instance_id, generic_model, generic_form,
                     instance.event = event_instance
                 elif(generic_model == Event):
                     instance.user = user
+                elif(generic_model == Sponsorship):
+                    instance = form.save(commit=False)
+                    event_instance = Event.objects.get(id=instance_id)
+                    instance.event = event_instance
+                    print(event_instance.name)
+                    sponsor_instance = Sponsors.objects.get(id=auxiliar_id)
+                    instance.sponsor = sponsor_instance
+                    benefits = request.POST.get('benefits_2', '')
+                    benefits_instance = Benefit.objects.create(
+                        name='Benefits with ' + str(sponsor_instance.name),
+                        description=benefits
+                    )
+                    instance.benefits = benefits_instance
+                    concesions = request.POST.get('concesions_2', '')
+                    concesions_instance = Concession.objects.create(
+                        name='Concesions with ' + str(sponsor_instance.name),
+                        description=concesions
+                    )
+                    instance.concesions = concesions_instance
+                    print(sponsor_instance)
+                    print(benefits_instance)
+                    print(concesions_instance)
+                    sponsor = Sponsorship.objects.create(
+                        sponsor=sponsor_instance,
+                        event=event_instance,
+                        concesions=concesions_instance,
+                        benefits=benefits_instance,
+                    )
+                    print(sponsor)
+                    return HttpResponseRedirect('/my_events')
             form.save()
             forms = [form]
             return HttpResponseRedirect('/my_events')
@@ -181,13 +223,16 @@ def general_create(request, instance_id, generic_model, generic_form,
                           template_name,
                           {'forms': forms,
                            'success_message': 'Successfully added'})
-
         else:
+            print("Entre aqui")
+
             # return form with errors
             forms = [form]
-            return render(request,
-                          template_name,
-                          {'forms': forms, })
+            return render(
+                request,
+                template_name,
+                {'forms': forms, }
+            )
     forms = [form]
     return render(request, template_name, {'forms': forms, })
 
@@ -196,7 +241,7 @@ def getsponsors(request):
     if request.user.is_authenticated():
         if request.method == "POST":
             if'query' in request.POST:
-                events = list(Event.objects.all())
+                events = list(Event.objects.all().filter(user=request.user))
                 payload = {
                     'url': 'http://www.seccionamarilla.com.mx/resultados/'
                     + request.POST.get('query') + '/1'}
@@ -296,18 +341,29 @@ def general_groot(request,
                   generic_model):
     model_instance = generic_model.objects.get(id=instance_id)
     form = generic_form(instance=model_instance)
+    redirect = "/my_events"
     if request.method == 'POST':
         form = generic_form(request.POST, instance=model_instance)
         if 'delete' in request.POST:
             model_instance.delete()
-            return HttpResponseRedirect("/my_events")
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/my_events")
         else:
             forms = [form]
             return render(request, template_name,
                           {'forms': forms, 'parent': model_instance.id})
+        if(generic_model == Needs):
+            event = Event.objects.get(needs=model_instance)
+            redirect = "/events/" + str(instance_id)
+        elif generic_model == Benefit:
+            sponsorship = Sponsorship.objects.get(benefits=model_instance)
+            event = Event.objects.get(Sponsorships=sponsorship)
+            redirect = "/events/" + str(event.id) + "/sponsorships"
+        elif generic_model == Concession:
+            sponsorship = Sponsorship.objects.get(concesions=model_instance)
+            event = Event.objects.get(Sponsorships=sponsorship)
+            redirect = "/events/" + str(event.id) + "/sponsorships"
+        return HttpResponseRedirect(redirect)
     else:
         print("holi")
         forms = [form]
@@ -317,3 +373,52 @@ def general_groot(request,
 
 def history(request, user_name):
     return HttpResponseRedirect('/404')
+
+
+def add_sponsorship(request, event_id, sponsors_id):
+    if sponsors_id == -1 and event_id == -1:
+        event_id = request.POST.get('dropdown', '')
+        print(event_id)
+        name = request.POST.get('name', '')
+        tel = request.POST.get('tel', '')
+        print(tel)
+        address = request.POST.get('address', '')
+        photo = request.POST.get('photo', '')
+        # For now.
+        sponsors = Sponsors.objects.get_or_create(
+            name=name,
+            logo=photo,
+            tel=tel,
+            direccion=address
+        )
+        sponsors = Sponsors.objects.get(
+            name=name,
+            logo=photo,
+            tel=tel,
+            direccion=address
+        )
+        return HttpResponseRedirect(
+            "/add_sponsorship/" +
+            str(event_id) +
+            "/" + str(sponsors.id)
+        )
+    return general_create(
+        request,
+        event_id,
+        Sponsorship,
+        SponsorshipCreateForm,
+        'sponsorsManager/sponsorship_create_form.html',
+        sponsors_id
+    )
+
+
+def sponsorship(request, instance_id):
+    sponsorship = Sponsorship.objects.get(id=instance_id)
+    return render(request, "sponsorsManager/sponsorship_detail.html",
+                  {'sponsorship': sponsorship})
+
+def delete_sponsorship(request, instance_id):
+    sponsorship_instance = Sponsorship.objects.get(id=instance_id)
+    event_instance = Event.objects.get(Sponsorships = instance_id)
+    sponsorship_instance.delete()
+    return HttpResponseRedirect("/events/"+str(event_instance.id)+"/sponsorships")

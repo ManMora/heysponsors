@@ -16,13 +16,17 @@
 	{% if user.Events.count > 0 %}
 	<h1>Your events:</h1>
 	<table>
-	<thead><tr><th>Events</th><th>---------</th><th>Needs</th></tr></thead>
+	<thead><tr><th>Events</th><th>---------</th><th>Needs</th><th>---------</th><th>Sponsorships</th></tr></thead>
 	{% for event in user.Events.all %}
 	<tr>
 
 		<td><a href="/events/{{event.id}}">{{event}}</a></td>
 		<td></td>
 		<td><a href="/events/{{event.id}}/needs">Needs from {{event}}</a></td>
+		<td></td>
+		<td><a href="/events/{{event.id}}/sponsorships">Sponsorships of {{event}}</a></td>
+
+
 
 	</tr>
 	{% endfor %}
