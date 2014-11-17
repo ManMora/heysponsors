@@ -39,7 +39,6 @@ INSTALLED_APPS = (
     'crawler', 
     'sponsorsManager',
     'widget_tweaks',
-
 )
 
 MIDDLEWARE_CLASSES = (

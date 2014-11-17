@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
@@ -215,6 +216,8 @@ def general_create(request, instance_id, generic_model, generic_form,
                         benefits=benefits_instance,
                     )
                     print(sponsor)
+                    messages.add_message(request, messages.SUCCESS, 'Successfully added!')
+
                     return HttpResponseRedirect('/my_events')
             form.save()
             forms = [form]
@@ -224,16 +227,18 @@ def general_create(request, instance_id, generic_model, generic_form,
                           {'forms': forms,
                            'success_message': 'Successfully added'})
         else:
-            print("Entre aqui")
 
             # return form with errors
             forms = [form]
+            messages.add_message(request, messages.ERROR, 'Errors :(')
             return render(
                 request,
                 template_name,
                 {'forms': forms, }
             )
     forms = [form]
+    messages.add_message(request, messages.ERROR, 'FILL THE FIELDS :)')
+
     return render(request, template_name, {'forms': forms, })
 
 
@@ -345,27 +350,37 @@ def general_groot(request,
     if request.method == 'POST':
         form = generic_form(request.POST, instance=model_instance)
         if 'delete' in request.POST:
+            print model_instance
+            messages.add_message(request, messages.SUCCESS, 'Successfully deleted!')
             model_instance.delete()
+            return HttpResponseRedirect(redirect)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS, 'Stuff correctly uploaded')
+            return HttpResponseRedirect(redirect)
         else:
+            print 'asdfasd'
             forms = [form]
+            messages.add_message(request, messages.ERROR, 'Errors in form :(')
             return render(request, template_name,
                           {'forms': forms, 'parent': model_instance.id})
         if(generic_model == Needs):
+            messages.add_message(request, messages.INFO, 'OLII needs')
             event = Event.objects.get(needs=model_instance)
             redirect = "/events/" + str(instance_id)
         elif generic_model == Benefit:
+            messages.add_message(request, messages.INFO, 'OLII benefits')
             sponsorship = Sponsorship.objects.get(benefits=model_instance)
             event = Event.objects.get(Sponsorships=sponsorship)
             redirect = "/events/" + str(event.id) + "/sponsorships"
         elif generic_model == Concession:
+            messages.add_message(request, messages.INFO, 'OLII concessions')
             sponsorship = Sponsorship.objects.get(concesions=model_instance)
             event = Event.objects.get(Sponsorships=sponsorship)
             redirect = "/events/" + str(event.id) + "/sponsorships"
         return HttpResponseRedirect(redirect)
     else:
-        print("holi")
+        messages.add_message(request, messages.INFO, 'FILL THE FIELDS :3')
         forms = [form]
         return render(request, template_name,
                       {'forms': forms, 'parent': model_instance.id})
