@@ -12,13 +12,13 @@
 
 {% block content %}
 <div class="generic-form">
-	<h1>Sponsorship Detail</h1>
-	<h2>Sponsorship event: <a href="/events/{{sponsorship.event.id}}"> <u>{{sponsorship.event}}</u></a></h2>
-	<h2>Sponsorship Sponsor: {{sponsorship.sponsor.name}}</h2>
-	<h2>Sponsorship Sponsor's address: {{sponsorship.sponsor.direccion}}</h2>
-	<h2>Sponsorship Sponsor's phone: {{sponsorship.sponsor.tel}}</h2>
-	<h2>Sponsorship Benefits: <a href="/benefits/{{sponsorship.benefits.id}}"><u>{{sponsorship.benefits}}</u></a></h2>
-	<h2>Sponsorship Concessions: <a href="/concession/{{sponsorship.concesions.id}}"><u>{{sponsorship.concesions}}</u></a></h2>
+	<h3>Sponsorship Details</h3>
+    <p class="bold">Sponsorship event: </p><p><a href="/events/{{sponsorship.event.id}}"> <u>{{sponsorship.event}}</u></a></p>
+    <p class="bold">Sponsorship Sponsor: </p><p>{{sponsorship.sponsor.name}}</p>
+	<p class="bold">Sponsorship Sponsor's address: </p><p>{{sponsorship.sponsor.direccion}}</p>
+	<p class="bold">Sponsorship Sponsor's phone: </p><p>{{sponsorship.sponsor.tel}}</p>
+	<p class="bold">Sponsorship Benefits: </p><p><a href="/benefits/{{sponsorship.benefits.id}}"><u>{{sponsorship.benefits}}</u></a></p>
+	<p class="bold">Sponsorship Concessions: </p><p><a href="/concession/{{sponsorship.concesions.id}}"><u>{{sponsorship.concesions}}</u></a></p>
 	<a href="/sponsorship/{{sponsorship.id}}/delete"><button class="btn btn-danger submit">Delete</button></a>
 </div>
 {% endblock %}
