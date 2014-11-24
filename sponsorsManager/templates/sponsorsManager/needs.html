@@ -12,10 +12,9 @@
 
 {% block content %}
 <div class="generic-form">
-	<h1>Hello! {{user}}</h1>
-	<h1>Event selected: {{parent.name}}</h1>
+	<h3>Event selected: {{parent.name}}</h3>
 	{% if parent.Needs.count > 0 %}
-	<table>
+	<table class="table"  >
 		<thead><tr><th>Needs</th></tr></thead>
 		{% for need in parent.Needs.all %}
 		<tr>
