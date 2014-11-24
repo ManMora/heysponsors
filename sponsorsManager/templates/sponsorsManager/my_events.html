@@ -18,15 +18,13 @@
 	<table>
 	<thead><tr><th>Events</th><th>---------</th><th>Needs</th><th>---------</th><th>Sponsorships</th></tr></thead>
 	{% for event in user.Events.all %}
-	<tr>
+	<tr {%if not event.active %}style="color: red"{%endif%}{%if event.finished %}style="color: green"{%endif%}>
 
 		<td><a href="/events/{{event.id}}">{{event}}</a></td>
 		<td></td>
 		<td><a href="/events/{{event.id}}/needs">Needs from {{event}}</a></td>
 		<td></td>
 		<td><a href="/events/{{event.id}}/sponsorships">Sponsorships of {{event}}</a></td>
-
-
 
 	</tr>
 	{% endfor %}

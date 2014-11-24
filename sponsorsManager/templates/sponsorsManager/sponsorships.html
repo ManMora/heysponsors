@@ -18,15 +18,15 @@
 		{% if parent.Sponsorships.count > 0 %}
 		<thead><tr><th>---------</th><th>Sponsor</th><th>---------</th><th>Benefits</th><th>---------</th><th>Concessions</th><th>---------</th><th>Edit</th></tr></thead>
 			{% for sponsorship in parent.Sponsorships.all %}
-			<tr>
+			<tr {%if not sponsorship.active %}style="color: red"{%endif%}{%if sponsorship.finished %}style="color: green"{%endif%}>
 				<td></td>
 				<td>{{sponsorship.sponsor.name}}</td>
 				<td></td>
-				<td><a href="/benefits/{{sponsorship.benefits.id}}">{{sponsorship.benefits}}</a></td>
+				<td><a href="/benefits/{{sponsorship.benefits.id}}">{{sponsorship.benefits.name}}</a></td>
 				<td></td>
-				<td><a href="/concession/{{sponsorship.concesions.id}}">{{sponsorship.concesions}}</a></td>
+				<td><a href="/concession/{{sponsorship.concesions.id}}">{{sponsorship.concesions.name}}</a></td>
 				<td></td>
-				<td><a href="/sponsorship/{{sponsorship.id}}">Detail</a></td>
+				<td><a href="/sponsorship/{{sponsorship.id}}/detail">Detail</a></td>
 			</tr>
 			{% endfor %}
 			{% else %}
@@ -34,6 +34,8 @@
 			<div>Search a <a href="/sponsors"><u>sponsor</u></a> in order to start the interaction</div>
 		{% endif %}
 	</table>
+	<input class="btn btn-success submit" type="button" value='Back' onClick="javascript:history.go(-1)">
+
 </div>
 {% endblock %}
 

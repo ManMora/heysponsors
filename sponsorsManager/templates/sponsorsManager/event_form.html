@@ -13,11 +13,16 @@ Add event
 {% endblock %}
 {% block buttons %}
 <div class="form-group submit">
+	<input class="btn btn-success submit" type="button" value='Back' onClick="javascript:history.go(-1)">
+	{% if event.finished %}
+	<input class="btn btn-info submit" type="submit" name='reactivate' value='Reactivate Event'>
+	{% elif event.active %}
 	<input class="btn btn-success submit" type="submit" name='update' value='Update'>
-
-	<input class="btn btn-danger submit" type="submit" name='delete' value='Delete'>
-
-
+	<input class="btn btn-danger submit" type="submit" name='cancel' value='Cancel Event'>
+	<input class="btn btn-info submit" type="submit" name='finish' value='Finish Event'>
 	<button class="btn btn-success submit"><a href="/events/{{parent}}/add_need" class="submit">Create need</a></button>
+	{% else %}
+	<input class="btn btn-info submit" type="submit" name='reactivate' value='Reactivate Event'>
+	{%endif%}
 </div>
 {% endblock %}

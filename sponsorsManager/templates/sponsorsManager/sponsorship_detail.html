@@ -19,7 +19,20 @@
 	<h2>Sponsorship Sponsor's phone: {{sponsorship.sponsor.tel}}</h2>
 	<h2>Sponsorship Benefits: <a href="/benefits/{{sponsorship.benefits.id}}"><u>{{sponsorship.benefits}}</u></a></h2>
 	<h2>Sponsorship Concessions: <a href="/concession/{{sponsorship.concesions.id}}"><u>{{sponsorship.concesions}}</u></a></h2>
-	<a href="/sponsorship/{{sponsorship.id}}/delete"><button class="btn btn-danger submit">Delete</button></a>
+	<form method="post" action="">{% csrf_token %}
+	<div class="form-group submit">
+	<input class="btn btn-success submit" type="button" value='Back' onClick="javascript:history.go(-1)">
+	{%if event.active and sponsorship.active and not event.finished and not sponsorship.finished%}
+	<a href="/sponsorship/{{sponsorship.id}}/cancel/"><input class="btn btn-danger submit" type="button" name='cancel' value='Cancel Sponsorship'></a>
+	<a href="/sponsorship/{{sponsorship.id}}/finish/"><input class="btn btn-info submit" type="button" name='finish' value='Finish Sponsorship'></a>
+	{% elif sponsorship.finished %}
+	<a href="/sponsorship/{{sponsorship.id}}/reactivate/"><input class="btn btn-info submit" type="button" name='reactivate' value='Reactivate Sponsorship'></a>
+	{% elif not sponsorship.active %}
+	<a href="/sponsorship/{{sponsorship.id}}/reactivate/"><input class="btn btn-info submit" type="button" name='reactivate' value='Reactivate Sponsorship'></a>
+	{%endif%}
+	</div>
+	</form>
+
 </div>
 {% endblock %}
 

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User, UserManager
@@ -35,6 +36,8 @@ class Event(models.Model):
     ##team_members = models.ManyToManyField(User)
     budget = models.IntegerField()
     goal = models.TextField()
+    active = models.BooleanField(default=1)
+    finished = models.BooleanField(default=0)
 
     class Meta:
         verbose_name = "Event"
@@ -72,18 +75,6 @@ class Sponsors(models.Model):
         return self.name + " , " + self.direccion
 
 
-class Sponsor_cat(models.Model):
-    name = models.CharField(max_length=140)
-    description = models.TextField()
-
-    class Meta:
-        verbose_name = "Category"
-        verbose_name_plural = "Categories"
-
-    def __str__(self):
-        return self.name
-
-
 class Benefit(models.Model):
     name = models.CharField(max_length=140)
     description = models.TextField()
@@ -113,6 +104,8 @@ class Sponsorship(models.Model):
     event = models.ForeignKey('Event', related_name='Sponsorships')
     benefits = models.ForeignKey('Benefit', related_name='Sponsorships')
     concesions = models.ForeignKey('Concession', related_name='Sponsorships')
+    active = models.BooleanField(default=1)
+    finished = models.BooleanField(default=0)
 
     class Meta:
         verbose_name = "Sponsorship"
@@ -120,3 +113,21 @@ class Sponsorship(models.Model):
 
     def __str__(self):
         return str(self.sponsor) + str(self.event)
+
+class ActivityReport(models.Model):
+    user = models.ForeignKey(User, related_name='Report')
+    
+    def __str__(self):
+        return "Log Report from " + str(self.user)
+
+
+class LogActivity(models.Model):
+    date = models.DateTimeField(blank=False, default=datetime.now())
+    report = models.ForeignKey(ActivityReport, related_name='Logs' )
+    content = models.TextField()
+
+    class Meta:
+        verbose_name_plural = "Log activities"
+
+    def __str__(self):
+        return str(self.content)

@@ -13,21 +13,20 @@
 {% block content %}
 <div class="generic-form">
 	<h1>Hello! {{user}}</h1>
-	<h1>Event selected: {{parent.name}}</h1>
-	{% if parent.Needs.count > 0 %}
 	<table>
-		<thead><tr><th>Needs</th></tr></thead>
-		{% for need in parent.Needs.all %}
-		<tr>
-			<td><a href="/needs/{{need.id}}">{{need.name}}</td></a>
-		</tr>
+		<thead><tr><th>---------</th><th>Date</th><th>---------</th><th>Log</th><th>---------</th></tr></thead>
+		{% for log in logs %}
+			<tr>
+				<td></td>
+				<td>{{log.date}}</td>
+				<td></td>
+				<td>{{log.content}}</td>
+				<td></td>
+			</tr>
 		{% endfor %}
-		{% endif %}
-		{% if parent.active %}
-		<a href="/events/{{parent.id}}/add_need/"><i class="fa fa-plus"></i>Add Need</a>
-		{% endif %}
 	</table>
-<input class="btn btn-success submit" type="button" value='Back' onClick="javascript:history.go(-1)">
+	<input class="btn btn-success submit" type="button" value='Back' onClick="javascript:history.go(-1)">
+
 </div>
 {% endblock %}
 

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from forms import UserCreateForm, ConcessionsCreateForm
 from forms import EventReadForm, BenefitsCreateForm
 from forms import EventCreateForm, NeedsCreateForm, SponsorshipCreateForm
@@ -68,11 +69,8 @@ urlpatterns = patterns('',
                  'generic_model': Benefit,
              },
              name='benefits'),
-         url(r'^sponsorship/(?P<instance_id>\w{0,50})$',
+         url(r'^sponsorship/(?P<instance_id>\w{0,50})/(?P<action>\w{0,50})/$',
              views.sponsorship,
-             name='sponsorships'),
-         url(r'^sponsorship/(?P<instance_id>\w{0,50})/delete$',
-             views.delete_sponsorship,
              name='sponsorships'),
          url(r'^concession/(?P<instance_id>\w{0,50})$',
              views.general_groot,
