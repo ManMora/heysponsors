@@ -487,13 +487,15 @@ def general_groot(request,
             ev = Event.objects.get(Sponsorships=spon.id)
             return render(request, template_name,
                           {'forms': forms, 'parent': model_instance.id,
-                           'event': ev, 'sponsorship': spon, },)
+                           'event': ev, 'sponsorship': spon, 
+                           'title': 'Update benefits'},)
         if generic_model == Concession:
             spon = Sponsorship.objects.get(concesions=model_instance.id)
             ev = Event.objects.get(Sponsorships=spon.id)
             return render(request, template_name,
                           {'forms': forms, 'parent': model_instance.id,
-                           'event': ev, 'sponsorship': spon, },)
+                           'event': ev, 'sponsorship': spon,
+                           'title': 'Update Concessions' },)
         if generic_model == Needs:
             ev = Event.objects.get(Needs=model_instance.id)
             return render(request, template_name,
@@ -619,6 +621,7 @@ def send_emails(request):
                  #email {
                    background-image:url("http://static2.wikia.nocookie.net/__cb20131129111846/neoxadventures/es/images/d/d1/Fondogif.jpg");
                    background-color:#336699;
+                  @import url(http://fonts.googleapis.com/css?family=Merienda);
                  }
               </style>
             </head>
@@ -626,8 +629,13 @@ def send_emails(request):
              <div style="background:url('https://ci4.googleusercontent.com/proxy/mPjLVWw5-6QqIzGSKnU6B1Sp1WQQzTmYxLHG6qCND_jEv6iIkvJQpHEqnP0dDal3K6AUi7ThHcqx6B2XWcZcjQZWnxWskXn2FJLhZN0x3hNGKnnbwXk=s0-d-e1-ft#http://www.gstatic.com/android/market_images/email/email_top.png') no-repeat;width:100%;min-height:75px;display:block">
 
                 <div style="padding-top:30px;padding-left:50px;padding-right:50px">
-                    <img src="http://s29.postimg.org/u7detfhab/logo.png" alt="Google Play" style="border:none">
+                    <img src="http://s29.postimg.org/u7detfhab/logo.png"  height="80" width="80" alt="Google Play"  align="middle" style="border:none">
                 </div>
+
+            </div>
+            <div style="background:url('https://ci6.googleusercontent.com/proxy/Y6T6600sZwPUq5_OV_GKwVBk1bacpj8ZrlMaZjpK460x6sJpVMAUgvQtsVOA9zKEvgC6ODTZy7Rj-kTbTXnHo_N7D91xPP8GKvIgiRSHWiazm9VeNpo=s0-d-e1-ft#http://www.gstatic.com/android/market_images/email/email_mid.png') repeat-y;width:100%;display:block">
+                <div style="padding-left:50px;padding-right:50px; padding-bottom:1px">
+                    <div style="border-bottom:1px solid #ededed"></div>
 
             <h1>Hello again from Hey Sponsors!</h1>"""
             all_events = current_user.user.Events.all()
@@ -638,7 +646,7 @@ def send_emails(request):
                 active=True
             )[:3]
             if filtered_events.count() > 0:
-                content += """These are your next events. Have you contacted 
+                content += """These are your next events. <br>Have you contacted 
                 all your sponsors to make sure you are on time?
                 <br />"""
                 for current_event in filtered_events:
@@ -653,26 +661,25 @@ def send_emails(request):
                         content += '</ul>'
                     if current_event.Sponsorships.count() > 0:
                         content += 'Your sponsorships: '
-                        content += """<table>
-                            <thead>
-                                <tr>
-                                    <th>Sponsor</th>
-                                    <th>Benefits</th>
-                                    <th>Concessions</th>
-                                </tr>
-                            </thead>"""
                         all_sponsorships = current_event.Sponsorships.all()
                         for current_sponsorship in all_sponsorships:
                             if current_sponsorship.active is True and current_sponsorship.finished is False:
-                                content += "<tr><td>"
+                                content += "<br />Sponsor: "
                                 content += current_sponsorship.sponsor.name
-                                content += "</td><td>"
+                                content += "<br />Benefits: "
                                 content += current_sponsorship.benefits.name
-                                content += "</td><td>"
+                                content += "<br />Concessions: "
                                 content += current_sponsorship.concesions.name
-                                content += "</td></tr>"
-                        content += "</table>"
-                content += "</div></body>"
+                                content += "<br />"
+                content += """
+                </div>
+
+                </div>
+                <div style="background:url('https://ci5.googleusercontent.com/proxy/u6KYrquoddKACxnOzJ_0lN61heutVpw6mvCoYm12429bUiIixNVcgybrhdlhejL3Wt_3e-Z40wScTl6vSA4PJCyVv36WJtiqQKPkLLgp0eptolrfhCwmolk=s0-d-e1-ft#http://www.gstatic.com/android/market_images/email/email_bottom.png') no-repeat;width:100%;min-height:50px;display:block">
+                </div>
+
+                </body>
+                """
                 """
                 # Create message container - the correct MIME type is
                 # multipart/alternative.
