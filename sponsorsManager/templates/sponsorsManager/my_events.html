@@ -12,10 +12,10 @@
 
 {% block content %}
 <div class="generic-form">
-	<h3>Hello! {{user}}</h3>
+    <h3>Hello! {{user}}</h3>
+    <a class="btn btn-default"  href="/{{user}}/events/add_event/"><i class="fa fa-plus"></i>Add Event</a>
 	{% if user.Events.count > 0 %}
 	<h4>Your events:</h4>
-    <a class="btn btn-default"  href="/{{user}}/events/add_event/"><i class="fa fa-plus"></i>Add Event</a>
     <table class="table">
         <thead><tr><th>Events</th><th></th><th>Needs</th><th></th><th>Sponsorships</th></tr></thead>
 	{% for event in user.Events.all %}
