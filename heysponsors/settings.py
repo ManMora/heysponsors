@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
@@ -88,3 +87,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'     # app name (dot) model name
+## Remove before deploy
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+f = open('passwords.txt', 'r')
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'heysponsors@gmail.com'
+EMAIL_HOST_PASSWORD = f.readline()
