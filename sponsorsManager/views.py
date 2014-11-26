@@ -1,14 +1,20 @@
 # -*- encoding: utf-8 -*-
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.core.mail import EmailMessage
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.shortcuts import render
 from django.template import RequestContext, loader
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from datetime import datetime
 from forms import UserCreateForm, UserForm, EventCreateForm, EventReadForm
 from forms import NeedsCreateForm, UserEditForm, UserProfileEditForm
 from forms import SponsorshipCreateForm
@@ -24,6 +30,8 @@ def main_controller(request, petition):
     user = request.user
     if petition == 'history':
         return history(request)
+    if petition == 'emails':
+        return send_emails(request)
     if petition == 'home' or petition == 'login':
         return index(request)
     if petition == 'logout':
@@ -40,6 +48,8 @@ def main_controller(request, petition):
                             user)
     if request.user.is_authenticated():
         return profile(request, petition)
+    else:
+        HttpResponseRedirect("/404")
 
 
 def add_to_log(request, text):
@@ -116,7 +126,6 @@ def signup(request):
         if uform.is_valid() and pform.is_valid():
             user = uform.save()
             password = request.POST.get('password', '')
-            print(password)
             user.set_password(password)
             user.save()
             profile = pform.save(commit=False)
@@ -127,7 +136,9 @@ def signup(request):
                                 password=request.POST['password'])
             login(request, user)
             forms = {uform, pform}
-            add_to_log(request, "User "+str(user)+" joined the application")
+            add_to_log(
+                request, "User " + user.username + " joined the application"
+            )
 
             return HttpResponseRedirect('/' + request.POST['username'])
 
@@ -151,7 +162,11 @@ def profile(request, user_name):
     try:
         user = User.objects.get(username=user_name)
         if user == user2 or user is None:
-            return render(request, 'sponsorsManager/profile.html')
+            all_events = user.Events.all()
+            filtered_events = all_events.order_by('date').filter(date__gte=datetime.now())[:5]
+            return render(request, 'sponsorsManager/profile.html',
+                          {'events': filtered_events}
+                          )
         else:
             return HttpResponseRedirect('/404')
     except User.DoesNotExist:
@@ -163,7 +178,7 @@ def invalid(request):
 
 
 def logout_view(request):
-    add_to_log(request,'Log out')
+    add_to_log(request, 'Log out')
     logout(request)
     return HttpResponseRedirect("/")
 
@@ -376,7 +391,7 @@ def general_groot(request,
             add_to_log(request, "Canceled " +
                        generic_model._meta.verbose_name.title() +
                        " " +
-                       str(model_instance))
+                       model_instance.name)
             return HttpResponseRedirect(redirect)
         if 'reactivate' in request.POST:
             model_instance.active = True
@@ -384,14 +399,14 @@ def general_groot(request,
             add_to_log(request, "Reactivated " +
                        generic_model._meta.verbose_name.title() +
                        " " +
-                       str(model_instance))
+                       model_instance.name)
             model_instance.save()
             return HttpResponseRedirect(redirect)
         if 'finish' in request.POST:
             add_to_log(request, "Finished " +
                        generic_model._meta.verbose_name.title() +
                        " " +
-                       str(model_instance))
+                       model_instance.name)
             print(model_instance.finished)
             model_instance.finished = True
             print(model_instance.finished)
@@ -401,7 +416,7 @@ def general_groot(request,
             add_to_log(request, "Deleted " +
                        generic_model._meta.verbose_name.title() +
                        " " +
-                       str(model_instance))
+                       model_instance.name)
             print model_instance
             messages.add_message(
                 request, messages.SUCCESS, 'Successfully deleted!')
@@ -411,7 +426,7 @@ def general_groot(request,
             add_to_log(request, "Updated " +
                        generic_model._meta.verbose_name.title() +
                        " " +
-                       str(model_instance))
+                       model_instance.name)
             form.save()
             messages.add_message(
                 request, messages.SUCCESS, 'Stuff correctly uploaded')
@@ -473,9 +488,9 @@ def history(request):
         return HttpResponseRedirect('/404')
     else:
         template_name = "sponsorsManager/history.html"
-        report = ActivityReport.objects.get(user = user)
-        logs = LogActivity.objects.filter(report = report)
-        return render(request, template_name, {'logs': logs,}, )
+        report = ActivityReport.objects.get(user=user)
+        logs = LogActivity.objects.filter(report=report)
+        return render(request, template_name, {'logs': logs, }, )
 
 
 def add_sponsorship(request, event_id, sponsors_id):
@@ -553,3 +568,54 @@ def sponsorship(request, instance_id, action):
                           )
     else:
         return HttpResponseRedirect('/404')
+
+
+def send_emails(request):
+    if request.method == 'GET':
+        all_users = UserProfile.objects.all()
+        for current_user in all_users:
+            email_to = current_user.user.email
+            email_from = 'no-reply@hey-sponsors.com'
+            subject = 'Your weekly reminder'
+            content = '<h1>Hello again from Hey Sponsors!</h1>'
+            all_events = current_user.user.Events.all()
+            print(datetime.now())
+            filtered_events = all_events.order_by(
+                'date').filter(date__gte=datetime.now())[:3]
+            if filtered_events.count() > 0:
+                for current_event in filtered_events:
+                    content += current_event.name + '<br>'
+                    content += datetime.strptime(
+                        current_event.date, "%Y-%m-%d") + '<br>'
+                """
+                # Create message container - the correct MIME type is
+                # multipart/alternative.
+                msg = MIMEMultipart('alternative')
+                msg['Subject'] = subject
+                msg['From'] = email_from
+                msg['To'] = email_to
+                print(email_to)
+                # sending_content = MIMEText(content, 'html')
+                # msg.attach(sending_content)
+                # Send the message via local SMTP server.
+                s = smtplib.SMTP('localhost')
+                # sendmail function takes 3 arguments: sender's address, recipient's address
+                # and message to send - here it is sent as one string.
+                # s.sendmail(me, you, msg.as_string())
+                # s.quit()
+                """
+                #print("sending mail to email: "+email_to)
+                """email = EmailMessage(
+                    subject,
+                    content,
+                    to=[email_to],
+                    headers={'Reply-To': 'no-reply@hey-sponsors.com'}
+                )"""
+                print(content)
+                msg = EmailMessage(subject, content, to=[email_to])
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
+
+            # email.send()
+
+    return index(request)

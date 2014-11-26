@@ -12,7 +12,7 @@
 
 {% block content %}
 <div class="generic-form">
-    <h3>Hello! {{user}}</h3>
+	<h3>Hello! {{user}}</h3>
     <a class="btn btn-default"  href="/{{user}}/events/add_event/"><i class="fa fa-plus"></i>Add Event</a>
 	{% if user.Events.count > 0 %}
 	<h4>Your events:</h4>
@@ -21,11 +21,11 @@
 	{% for event in user.Events.all %}
 	<tr {%if not event.active %}style="color: red"{%endif%}{%if event.finished %}style="color: green"{%endif%}>
 
-		<td><a href="/events/{{event.id}}">{{event}}</a></td>
+		<td><a href="/events/{{event.id}}">{{event.name}}</a></td>
 		<td></td>
-		<td><a href="/events/{{event.id}}/needs">Needs from {{event}}</a></td>
+		<td><a href="/events/{{event.id}}/needs">Needs from {{event.name}}</a></td>
 		<td></td>
-		<td><a href="/events/{{event.id}}/sponsorships">Sponsorships of {{event}}</a></td>
+		<td><a href="/events/{{event.id}}/sponsorships">Sponsorships of {{event.name}}</a></td>
 
 	</tr>
 	{% endfor %}
