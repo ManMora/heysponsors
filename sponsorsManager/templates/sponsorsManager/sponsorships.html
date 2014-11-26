@@ -18,13 +18,9 @@
 		<thead><tr><th>Sponsor</th><th>Benefits</th><th>Concessions</th><th>Edit</th></tr></thead>
 			{% for sponsorship in parent.Sponsorships.all %}
 			<tr {%if not sponsorship.active %}style="color: red"{%endif%}{%if sponsorship.finished %}style="color: green"{%endif%}>
-				<td></td>
 				<td>{{sponsorship.sponsor.name}}</td>
-				<td></td>
 				<td><a href="/benefits/{{sponsorship.benefits.id}}">{{sponsorship.benefits.name}}</a></td>
-				<td></td>
 				<td><a href="/concession/{{sponsorship.concesions.id}}">{{sponsorship.concesions.name}}</a></td>
-				<td></td>
 				<td><a href="/sponsorship/{{sponsorship.id}}/detail">Detail</a></td>
 			</tr>
 			{% endfor %}

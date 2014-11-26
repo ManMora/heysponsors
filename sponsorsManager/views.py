@@ -487,7 +487,7 @@ def general_groot(request,
             ev = Event.objects.get(Sponsorships=spon.id)
             return render(request, template_name,
                           {'forms': forms, 'parent': model_instance.id,
-                           'event': ev, 'sponsorship': spon, 
+                           'event': ev, 'sponsorship': spon,
                            'title': 'Update benefits'},)
         if generic_model == Concession:
             spon = Sponsorship.objects.get(concesions=model_instance.id)
@@ -518,22 +518,17 @@ def history(request):
 
 
 def add_sponsorship(request, event_id, sponsors_id):
-    try:
-        ev = Event.objects.get(id=event_id)
-    except:
-        messages.add_message(
+
+    if sponsors_id == -1 and event_id == -1:
+
+        event_id = request.POST.get('dropdown', '')
+        if event_id == 'none':
+            messages.add_message(
             request, messages.ERROR, 'You didn\'t select an event',
             extra_tags="danger"
-        )
-        return HttpResponseRedirect('/sponsors')
-    if ev.user is not request.user:
-        messages.add_message(
-            request, messages.ERROR,
-            'Do not try to fool me, choose an event that is yours',
-            extra_tags="danger"
-        )
-    if sponsors_id == -1 and event_id == -1:
-        event_id = request.POST.get('dropdown', '')
+            )
+            return HttpResponseRedirect('/sponsors')
+
         print(event_id)
         name = request.POST.get('name', '')
         tel = request.POST.get('tel', '')
@@ -558,7 +553,13 @@ def add_sponsorship(request, event_id, sponsors_id):
             str(event_id) +
             "/" + str(sponsors.id)
         )
-    return general_create(
+    if ev.user is not request.user:
+        messages.add_message(
+            request, messages.ERROR,
+            'Do not try to fool me, choose an event that is yours',
+            extra_tags="danger"
+        )
+        return general_create(
         request,
         event_id,
         Sponsorship,
@@ -646,10 +647,11 @@ def send_emails(request):
                 active=True
             )[:3]
             if filtered_events.count() > 0:
-                content += """These are your next events. <br>Have you contacted 
+                content += """These are your next events. <br>Have you contacted
                 all your sponsors to make sure you are on time?
                 <br />"""
                 for current_event in filtered_events:
+                    content += '<br/><hr><br/>'
                     content += 'Event name: ' + current_event.name + '<br>'
                     content += 'Date: ' + \
                         current_event.date.strftime("%d/%m/%Y")
@@ -680,30 +682,6 @@ def send_emails(request):
 
                 </body>
                 """
-                """
-                # Create message container - the correct MIME type is
-                # multipart/alternative.
-                msg = MIMEMultipart('alternative')
-                msg['Subject'] = subject
-                msg['From'] = email_from
-                msg['To'] = email_to
-                print(email_to)
-                # sending_content = MIMEText(content, 'html')
-                # msg.attach(sending_content)
-                # Send the message via local SMTP server.
-                s = smtplib.SMTP('localhost')
-                # sendmail function takes 3 arguments: sender's address, recipient's address
-                # and message to send - here it is sent as one string.
-                # s.sendmail(me, you, msg.as_string())
-                # s.quit()
-                """
-                #print("sending mail to email: "+email_to)
-                """email = EmailMessage(
-                    subject,
-                    content,
-                    to=[email_to],
-                    headers={'Reply-To': 'no-reply@hey-sponsors.com'}
-                )"""
                 print(content)
                 msg = EmailMessage(subject, content, to=[email_to])
                 msg.content_subtype = "html"  # Main content is now text/html

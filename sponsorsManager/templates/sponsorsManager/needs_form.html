@@ -6,17 +6,17 @@
 {% endblock %}
 
 {% block form_title%}
-Change this for different situations
+Needs
 {% endblock %}
 {% block form_button_submit %}
-Add event
+Add Need
 {% endblock %}
 {% block buttons %}
 <div class="form-group submit">
 	<input class="btn btn-success submit" type="button" value='Back' onClick="javascript:history.go(-1)">
 	{% if event.active and not event.finished%}
 	<input class="btn btn-success submit" type="submit" name='update' value='Update need'>
-	<input class="btn btn-info danger" type="submit" name='delete' value='Delete need'>
+	<input class="btn btn-danger submit " type="submit" name='delete' value='Delete need'>
 	{%endif%}
 </div>
 

@@ -15,8 +15,10 @@
 </head>
 <script type="text/javascript">
     $(function () {
-            $('#id_date').attr('data-date-format','YYYY-MM-DD h:m:s')
-            $('#id_date').datetimepicker();
+            $('#id_date').attr('data-date-format','YYYY-MM-DD H:m:s')
+            $('#id_date').datetimepicker({
+                useSeconds: true,
+            });
     });
 </script>
 <body>
