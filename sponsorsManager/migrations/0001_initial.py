@@ -56,7 +56,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=140)),
                 ('description', models.TextField()),
-                ('date', models.DateTimeField(default=datetime.datetime(2014, 11, 24, 21, 28, 39, 771651))),
+                ('date', models.DateTimeField(default=datetime.datetime(2014, 11, 26, 1, 35, 49, 381267))),
                 ('duration', models.TimeField()),
                 ('link_map', models.CharField(max_length=140)),
                 ('url_event', models.URLField(max_length=140)),
@@ -76,7 +76,7 @@ class Migration(migrations.Migration):
             name='LogActivity',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('date', models.DateTimeField(default=datetime.datetime(2014, 11, 24, 21, 28, 39, 775888))),
+                ('date', models.DateTimeField(default=datetime.datetime(2014, 11, 26, 1, 35, 49, 385582))),
                 ('content', models.TextField()),
                 ('report', models.ForeignKey(related_name=b'Logs', to='sponsorsManager.ActivityReport')),
             ],
