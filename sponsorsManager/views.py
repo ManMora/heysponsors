@@ -48,6 +48,8 @@ def main_controller(request, petition):
                             user)
     if request.user.is_authenticated():
         return profile(request, petition)
+    else:
+        HttpResponseRedirect("/404")
 
 
 def add_to_log(request, text):
@@ -160,7 +162,11 @@ def profile(request, user_name):
     try:
         user = User.objects.get(username=user_name)
         if user == user2 or user is None:
-            return render(request, 'sponsorsManager/profile.html')
+            all_events = user.Events.all()
+            filtered_events = all_events.order_by('date').filter(date__gte=datetime.now())[:5]
+            return render(request, 'sponsorsManager/profile.html',
+                          {'events': filtered_events}
+                          )
         else:
             return HttpResponseRedirect('/404')
     except User.DoesNotExist:
@@ -172,7 +178,7 @@ def invalid(request):
 
 
 def logout_view(request):
-    add_to_log(request,'Log out')
+    add_to_log(request, 'Log out')
     logout(request)
     return HttpResponseRedirect("/")
 
@@ -574,11 +580,13 @@ def send_emails(request):
             content = '<h1>Hello again from Hey Sponsors!</h1>'
             all_events = current_user.user.Events.all()
             print(datetime.now())
-            filtered_events = all_events.order_by('date').filter(date__gte=datetime.now())[:3]
+            filtered_events = all_events.order_by(
+                'date').filter(date__gte=datetime.now())[:3]
             if filtered_events.count() > 0:
                 for current_event in filtered_events:
-                    content += current_event.name+'<br>'
-                    content += datetime.strptime(current_event.date, "%Y-%m-%d")+'<br>'
+                    content += current_event.name + '<br>'
+                    content += datetime.strptime(
+                        current_event.date, "%Y-%m-%d") + '<br>'
                 """
                 # Create message container - the correct MIME type is
                 # multipart/alternative.

@@ -31,7 +31,7 @@ class Event(models.Model):
     user = models.ForeignKey(User, related_name='Events')
     date = models.DateTimeField(blank=False)
     duration = models.TimeField(blank=False)
-    link_map = models.CharField(max_length=140)
+    link_map = models.CharField(max_length=512)
     url_event = models.URLField(max_length=140)
     ##team_members = models.ManyToManyField(User)
     budget = models.IntegerField()
