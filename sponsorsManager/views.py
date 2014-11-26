@@ -163,6 +163,7 @@ def invalid(request):
 
 
 def logout_view(request):
+    add_to_log(request,'Log out')
     logout(request)
     return HttpResponseRedirect("/")
 

@@ -15,7 +15,7 @@ class UserProfile(models.Model):
     active = models.BooleanField(default=1)
     class Meta:
         verbose_name = "User"
-    
+
     def __str__(self):
         return self.user.username
 
@@ -116,7 +116,7 @@ class Sponsorship(models.Model):
 
 class ActivityReport(models.Model):
     user = models.ForeignKey(User, related_name='Report')
-    
+
     def __str__(self):
         return "Log Report from " + str(self.user)
 

@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crawler', 
+    'crawler',
     'sponsorsManager',
     'widget_tweaks',
 )
@@ -74,7 +74,7 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Mexico_City'
 
 USE_I18N = True
 
