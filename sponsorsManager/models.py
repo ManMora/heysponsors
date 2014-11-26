@@ -29,7 +29,7 @@ class Event(models.Model):
     name = models.CharField(max_length=140, unique=False)
     description = models.TextField()
     user = models.ForeignKey(User, related_name='Events')
-    date = models.DateTimeField(blank=False)
+    date = models.DateTimeField(blank=False, default=datetime.now())
     duration = models.TimeField(blank=False)
     link_map = models.CharField(max_length=512)
     url_event = models.URLField(max_length=140)

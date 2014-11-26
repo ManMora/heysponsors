@@ -139,7 +139,8 @@ def signup(request):
             add_to_log(
                 request, "User " + user.username + " joined the application"
             )
-
+            messages.add_message(request, messages.SUCCESS,
+                                 "Congratulations! Welcome to Hey Sponsors!")
             return HttpResponseRedirect('/' + request.POST['username'])
 
         else:
@@ -147,13 +148,18 @@ def signup(request):
             user = User.objects.get(username=username)
             print(user)
             if user is not None:
+                messages.add_message(request, messages.ERROR,
+                                     "User exists but is deactivated.",
+                                     extra_tags="danger")
                 return render(request,
                               template_name,
-                              {'forms': forms,
-                               'error_message':
-                               'User exists but is deactivated.'})
+                              {'forms': forms, })
             # return form with errors
+            messages.add_message(request, messages.ERROR,
+                                 "Errors in form",
+                                 extra_tags="danger")
             return render(request, template_name, {'forms': forms, })
+    messages.add_message(request, messages.INFO, "Fill all the fields")
     return render(request, template_name, {'forms': forms})
 
 
@@ -163,7 +169,12 @@ def profile(request, user_name):
         user = User.objects.get(username=user_name)
         if user == user2 or user is None:
             all_events = user.Events.all()
-            filtered_events = all_events.order_by('date').filter(date__gte=datetime.now())[:5]
+            filtered_events = all_events.order_by(
+                'date').filter(
+                date__gte=datetime.now(),
+                finished=False,
+                active=True
+            )[:5]
             return render(request, 'sponsorsManager/profile.html',
                           {'events': filtered_events}
                           )
@@ -266,14 +277,15 @@ def general_create(request, instance_id, generic_model, generic_form,
 
             # return form with errors
             forms = [form]
-            messages.add_message(request, messages.ERROR, 'Errors :(')
+            messages.add_message(request, messages.ERROR, 'Errors',
+                                 extra_tags='danger')
             return render(
                 request,
                 template_name,
                 {'forms': forms, }
             )
     forms = [form]
-    messages.add_message(request, messages.ERROR, 'FILL THE FIELDS :)')
+    messages.add_message(request, messages.INFO, 'Fill the fields')
 
     return render(request, template_name, {'forms': forms, })
 
@@ -323,7 +335,8 @@ def my_info(request, user_name):
                                          initial={'username': request.user},
                                          instance=model_user_instance)
                     pform = UserProfileEditForm(
-                        request.POST, instance=model_profile_instance)
+                        request.POST, instance=model_profile_instance
+                    )
                     print(request.POST)
                     if 'deactivate' in request.POST:
                         if request.user.check_password(
@@ -338,16 +351,19 @@ def my_info(request, user_name):
                             profile.user = user
                             profile.save()
                             logout(request)
+                            messages.add_message(request, messages.SUCCESS,
+                                                 "Correctly deactivated")
+
                             return HttpResponseRedirect('/home')
 
                         else:
                             forms = [uform, pform]
+                            messages.add_message(request, messages.ERROR,
+                                                 "Incorrect password",
+                                                 extra_tags="danger")
+
                             return render(request,
-                                          template_name, {'forms': forms,
-                                                          'success_message':
-                                                          'Incorrect' +
-                                                          ' password' +
-                                                          '. Try again'})
+                                          template_name, {'forms': forms,})
                     elif uform.is_valid() and pform.is_valid():
                         user = uform.save()
                         password = request.POST.get('password', '')
@@ -359,10 +375,15 @@ def my_info(request, user_name):
                         user = authenticate(username=request.user,
                                             password=password)
                         login(request, user)
+                        messages.add_message(request, messages.SUCCESS,
+                                             "Correctly uploaded")
                         return HttpResponseRedirect('/home')
                     else:
                         # return form with errors
                         forms = [uform, pform]
+                        messages.add_message(request, messages.ERROR,
+                                             "Errors in form",
+                                             extra_tags="danger")
                         return render(request, template_name, {'forms': forms})
                 forms = [uform, pform]
                 return render(request, template_name, {'forms': forms, })
@@ -429,11 +450,12 @@ def general_groot(request,
                        model_instance.name)
             form.save()
             messages.add_message(
-                request, messages.SUCCESS, 'Stuff correctly uploaded')
+                request, messages.SUCCESS, 'Successfully updated!')
             return HttpResponseRedirect(redirect)
         else:
             forms = [form]
-            messages.add_message(request, messages.ERROR, 'Errors in form :(')
+            messages.add_message(request, messages.ERROR, 'Errors in form',
+                                 extra_tags='danger')
             # return render(request, template_name,
             #              {'forms': forms, 'parent': model_instance.id})
         if(generic_model == Needs):
@@ -494,6 +516,20 @@ def history(request):
 
 
 def add_sponsorship(request, event_id, sponsors_id):
+    try:
+        ev = Event.objects.get(id=event_id)
+    except:
+        messages.add_message(
+            request, messages.ERROR, 'You didn\'t select an event',
+            extra_tags="danger"
+        )
+        return HttpResponseRedirect('/sponsors')
+    if ev.user is not request.user:
+        messages.add_message(
+            request, messages.ERROR,
+            'Do not try to fool me, choose an event that is yours',
+            extra_tags="danger"
+        )
     if sponsors_id == -1 and event_id == -1:
         event_id = request.POST.get('dropdown', '')
         print(event_id)
@@ -577,16 +613,66 @@ def send_emails(request):
             email_to = current_user.user.email
             email_from = 'no-reply@hey-sponsors.com'
             subject = 'Your weekly reminder'
-            content = '<h1>Hello again from Hey Sponsors!</h1>'
+            content = """
+            <head>
+              <style>
+                 #email {
+                   background-image:url("http://static2.wikia.nocookie.net/__cb20131129111846/neoxadventures/es/images/d/d1/Fondogif.jpg");
+                   background-color:#336699;
+                 }
+              </style>
+            </head>
+            <body>
+             <div style="background:url('https://ci4.googleusercontent.com/proxy/mPjLVWw5-6QqIzGSKnU6B1Sp1WQQzTmYxLHG6qCND_jEv6iIkvJQpHEqnP0dDal3K6AUi7ThHcqx6B2XWcZcjQZWnxWskXn2FJLhZN0x3hNGKnnbwXk=s0-d-e1-ft#http://www.gstatic.com/android/market_images/email/email_top.png') no-repeat;width:100%;min-height:75px;display:block">
+
+                <div style="padding-top:30px;padding-left:50px;padding-right:50px">
+                    <img src="http://s29.postimg.org/u7detfhab/logo.png" alt="Google Play" style="border:none">
+                </div>
+
+            <h1>Hello again from Hey Sponsors!</h1>"""
             all_events = current_user.user.Events.all()
             print(datetime.now())
-            filtered_events = all_events.order_by(
-                'date').filter(date__gte=datetime.now())[:3]
+            filtered_events = all_events.order_by('date').filter(
+                date__gte=datetime.now(),
+                finished=False,
+                active=True
+            )[:3]
             if filtered_events.count() > 0:
+                content += """These are your next events. Have you contacted 
+                all your sponsors to make sure you are on time?
+                <br />"""
                 for current_event in filtered_events:
-                    content += current_event.name + '<br>'
-                    content += datetime.strptime(
-                        current_event.date, "%Y-%m-%d") + '<br>'
+                    content += 'Event name: ' + current_event.name + '<br>'
+                    content += 'Date: ' + \
+                        current_event.date.strftime("%d/%m/%Y")
+                    content += '<br />'
+                    if current_event.Needs.count() > 0:
+                        content += "Needs: <br /><ul>"
+                        for current_need in current_event.Needs.all():
+                            content += '<li>' + current_need.name + '</li>'
+                        content += '</ul>'
+                    if current_event.Sponsorships.count() > 0:
+                        content += 'Your sponsorships: '
+                        content += """<table>
+                            <thead>
+                                <tr>
+                                    <th>Sponsor</th>
+                                    <th>Benefits</th>
+                                    <th>Concessions</th>
+                                </tr>
+                            </thead>"""
+                        all_sponsorships = current_event.Sponsorships.all()
+                        for current_sponsorship in all_sponsorships:
+                            if current_sponsorship.active is True and current_sponsorship.finished is False:
+                                content += "<tr><td>"
+                                content += current_sponsorship.sponsor.name
+                                content += "</td><td>"
+                                content += current_sponsorship.benefits.name
+                                content += "</td><td>"
+                                content += current_sponsorship.concesions.name
+                                content += "</td></tr>"
+                        content += "</table>"
+                content += "</div></body>"
                 """
                 # Create message container - the correct MIME type is
                 # multipart/alternative.

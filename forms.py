@@ -39,6 +39,7 @@ class EventCreateForm(ModelForm):
     link_map = forms.CharField(required=False)
     url_event = forms.URLField(required=False)
     goal = forms.CharField(required=False, widget=forms.Textarea)
+    budget = forms.IntegerField(min_value = 0)
 
     class Meta:
         model = Event
@@ -51,6 +52,7 @@ class EventReadForm(ModelForm):
     link_map = forms.CharField(required=False)
     url_event = forms.URLField(required=False)
     goal = forms.CharField(required=False, widget=forms.Textarea)
+    budget = forms.IntegerField(min_value = 0)
 
 
     class Meta:
